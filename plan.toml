@@ -8,11 +8,12 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 2
-updated_at = 2026-09-13T17:48:30Z
+sequence = 3
+updated_at = 2026-09-13T17:55:48Z
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
+scope = "CP-only ABPath certification, not AP boards or Step/USMLE. Questions with explanation review, delayed redos and practical laboratory interpretation drive the plan. Sketchy Path/Pharm are selective foundation support; do not let broad clinical treatment videos displace transfusion, methods/QC, chemistry, heme, diagnostic microbiology or management. Reading every page and activating every card are not required."
 default_question_target = 25
 review_rule = "Review every wrong answer and uncertain correct answer. Redo misses closed-book about two days later; repeat unresolved concepts about a week later. Track first-pass and repeated-question results separately. A complete first pass is not the end of the work."
 anki_rule = "Throughout the day: due selected CP cards first, prioritizing transfusion, heme/coag and chemistry; then selected Sketchy Micro cards matching the evening lessons. Add at most 10-20 useful facts daily only if reviews stay manageable. Do not activate entire overlapping decks. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
