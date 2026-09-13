@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+.DS_Store
+public/*
+!public/.gitkeep
+.local/
+private-context.md
+*.apkg
+*.anki2
+*.pdf
+*.docx
+*.xlsx

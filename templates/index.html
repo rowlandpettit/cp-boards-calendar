@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CP Boards Study Calendar</title>
+  <link rel="alternate" type="application/rss+xml" title="CP Boards" href="@@BASE@@/rss.xml">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #242424; background: #fff; font: 16px/1.5 system-ui, sans-serif; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 24px; }
+    header { border-bottom: 2px solid #282828; padding-bottom: 24px; }
+    h1 { font-size: 30px; margin: 0 0 12px; }
+    h2 { font-size: 20px; margin: 28px 0 12px; }
+    p { max-width: 780px; }
+    .count { color: #a43c3c; font-weight: 700; font-size: 24px; margin: 0; }
+    nav { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 20px; }
+    a { color: #12624f; text-underline-offset: 3px; overflow-wrap: anywhere; }
+    .meta { color: #555; margin: 8px 0; }
+    details { border-bottom: 1px solid #ddd; }
+    summary { padding: 16px 0; cursor: pointer; display: grid; grid-template-columns: 130px 1fr 100px; gap: 12px; align-items: baseline; }
+    summary time, summary small { color: #555; }
+    summary span { overflow-wrap: anywhere; font-weight: 600; }
+    .notes { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; margin: 0 0 24px 142px; }
+    details:target { border-left: 3px solid #12624f; padding-left: 12px; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid #12624f; outline-offset: 4px; }
+    @media (max-width: 600px) {
+      main { padding: 24px 16px; }
+      summary { grid-template-columns: 1fr auto; gap: 6px 10px; }
+      summary span { grid-column: 1 / -1; grid-row: 2; }
+      summary small { grid-column: 2; grid-row: 1; }
+      .notes { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>CP Boards</h1>
+    <p class="count" id="countdown">Exam: @@EXAM_LABEL@@</p>
+    <p class="meta">@@SCHEDULE@@; @@COUNT@@ study blocks</p>
+    <p>@@OBJECTIVE@@</p>
+    <nav aria-label="Study links">
+      <a href="@@WEBCAL@@">Subscribe to calendar</a>
+      <a href="@@BASE@@/cp-study.ics">Calendar file</a>
+      <a href="@@BASE@@/context.html">Study context</a>
+      <a href="@@REPO@@/blob/main/plan.toml">Edit plan</a>
+      <a href="@@BASE@@/rss.xml">RSS</a>
+    </nav>
+  </header>
+  <h2>Daily Plan</h2>
+  @@EVENTS@@
+</main>
+<script>
+  const examParts = '@@EXAM@@'.split('-').map(Number);
+  function refreshCountdown() {
+    const now = new Date();
+    const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    const exam = Date.UTC(examParts[0], examParts[1] - 1, examParts[2]);
+    const days = Math.round((exam - today) / 86400000);
+    document.getElementById('countdown').textContent = days > 0
+      ? `${days} ${days === 1 ? 'day' : 'days'} until @@EXAM_LABEL@@`
+      : days === 0 ? 'Exam day' : 'Study cycle complete';
+  }
+  function revealLinkedDay() {
+    const target = document.getElementById(location.hash.slice(1));
+    if (target instanceof HTMLDetailsElement) target.open = true;
+  }
+  refreshCountdown();
+  revealLinkedDay();
+  setInterval(refreshCountdown, 60000);
+  window.addEventListener('hashchange', revealLinkedDay);
+</script>
+</body>
+</html>

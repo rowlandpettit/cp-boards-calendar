@@ -1,0 +1,137 @@
+[settings]
+title = "CP Boards"
+start_date = 2026-09-14
+exam_date = 2026-10-19
+start = "05:00"
+duration_minutes = 120
+floating_times = true
+namespace = "cp-boards-calendar.rowlandpettit.com"
+site_url = "https://rowlandpettit.com/cp-boards-calendar"
+repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
+sequence = 1
+updated_at = 2026-09-13T17:00:00Z
+
+[strategy]
+objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
+default_question_target = 25
+review_rule = "Review every wrong answer and uncertain correct answer. Explain the distinction before moving on."
+anki_rule = "Review selected CP cards; add at most 10-20 useful facts from misses only if the review queue stays manageable. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
+flexibility = "Targets are provisional. Log actual work privately, review the plan weekly, and change upcoming topics based on fresh performance. Do not stack missed days or treat resource completion as a pass guarantee."
+capacity = "Two protected hours are the daily foundation. A full question-bank pass may need additional sessions; measure pace before adding them."
+gym = "The 5-7 AM study block intentionally overlaps the separate fitness routine, which stays unchanged. Use familiar audio or recall at the gym when practical; use seated study time for detailed questions, calculations and images. Count actual study completed, not two separate hours for overlapping events."
+
+[resources]
+dojo = "https://pathdojo.com/"
+ascp = "https://www.ascp.org/apps/services/education"
+primer = "https://app.pathprimer.com/"
+abpath = "https://abpath.org/exam-preparation/"
+blueprint = "https://abpath.org/wp-content/uploads/2026/01/CP_2026.pdf"
+bbguy = "https://www.bbguy.org/education/videos/"
+morgan = "https://www.microbeswithmorgan.com/"
+
+[topics.baseline]
+title = "Mixed baseline"
+goal = "Answer a fresh mixed CP set without references. Record confidence, review time and gap type; this is a starting sample, not a pass prediction."
+materials = "PathDojo CP plus relevant shared AP/CP categories; selected Ankoma after review."
+links = ["dojo", "blueprint"]
+
+[topics.transfusion]
+title = "Transfusion"
+goal = "Practice compatibility and antibody panels, components, reactions, donors, HLA and cellular therapy. Work through interpretations before revealing answers."
+materials = "PathDojo; selected ASCP CP or Arinsburg/Jhang transfusion questions; Blood Bank Guy only for specific gaps."
+links = ["dojo", "bbguy", "ascp"]
+
+[topics.heme]
+title = "Heme + coag"
+goal = "Practice benign and neoplastic hematology, coagulation algorithms, smears, flow plots and molecular associations. Describe findings before reading the interpretation."
+materials = "PathDojo including shared hematopathology; Remedial Hematopathology 2026 slides; selected CP Ankoma."
+links = ["dojo", "ascp"]
+
+[topics.chemistry]
+title = "Chemistry"
+goal = "Practice analytical methods, QC, acid-base and electrolyte interpretation, endocrine testing, toxicology, immunology and body fluids. Work calculations rather than recognizing formulas."
+materials = "PathDojo; selected Arinsburg/Jhang or ASCP chemistry questions; targeted current reference reading."
+links = ["dojo", "ascp", "primer"]
+
+[topics.micro]
+title = "Microbiology"
+goal = "Practice organism identification, test selection and interpretation, susceptibility principles and practical images. Use current terminology."
+materials = "PathDojo; targeted Morgan 2026 material; selected Ankoma or familiar Sketchy Micro cards, without duplicating entire decks."
+links = ["dojo", "morgan"]
+
+[topics.management]
+title = "Mixed + weekly reset"
+goal = "Include management, informatics, molecular methods and calculations. Review the week's recurring gaps and choose next week's priorities without dropping any core domain."
+materials = "Mixed PathDojo; selected management/molecular questions from ASCP or Arinsburg/Jhang; official blueprint."
+links = ["dojo", "blueprint"]
+
+[topics.consolidate]
+title = "Consolidate gaps"
+goal = "Revisit recurring errors and use unfamiliar second-source questions to check transfer. Prioritize explanations, practical figures and a short final-review list."
+materials = "Selected ASCP CP or Arinsburg/Jhang; flagged concepts; manageable CP Anki reviews."
+links = ["ascp", "abpath"]
+
+[topics.timed]
+title = "Timed mixed practice"
+goal = "Practice one 55-question mixed block in 66 minutes without references. Use the remaining time for priority misses; carry unresolved explanations into the next review session."
+materials = "Fresh CP and shared-topic questions where available. Label repeated-question scores as repeats."
+links = ["dojo", "ascp", "abpath"]
+
+[topics.light]
+title = "Light final review"
+goal = "Keep review brief and familiar: a few formulas, figures and recurring errors. No new broad resource. Confirm logistics and protect rest; the unused part of this block is optional."
+materials = "Short final-review list and familiar cards; official tutorial if not already completed."
+links = ["abpath"]
+
+[weekly]
+MO = "transfusion"
+TU = "heme"
+WE = "chemistry"
+TH = "transfusion"
+FR = "micro"
+SA = "heme"
+SU = "management"
+
+# Date keys identify the calendar occurrence. Keep them stable when changing topics/times.
+[overrides."2026-09-14"]
+topic = "baseline"
+
+[overrides."2026-09-19"]
+topic = "micro"
+note = "Give microbiology extra attention this week; retain mixed heme questions."
+
+[overrides."2026-09-26"]
+topic = "chemistry"
+
+[overrides."2026-10-03"]
+topic = "micro"
+
+[overrides."2026-10-10"]
+topic = "chemistry"
+
+[overrides."2026-10-12"]
+topic = "timed"
+mode = "timed"
+
+[overrides."2026-10-13"]
+topic = "consolidate"
+
+[overrides."2026-10-14"]
+topic = "consolidate"
+note = "Review transfusion and chemistry gaps, plus practical images."
+
+[overrides."2026-10-15"]
+topic = "timed"
+mode = "timed"
+
+[overrides."2026-10-16"]
+topic = "consolidate"
+note = "Finish the short final-review list. Avoid adding a new full bank."
+
+[overrides."2026-10-17"]
+topic = "light"
+mode = "light"
+
+[overrides."2026-10-18"]
+topic = "light"
+mode = "light"
