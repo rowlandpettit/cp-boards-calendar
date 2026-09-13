@@ -8,16 +8,18 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 1
-updated_at = 2026-09-13T17:00:00Z
+sequence = 2
+updated_at = 2026-09-13T17:48:30Z
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
 default_question_target = 25
-review_rule = "Review every wrong answer and uncertain correct answer. Explain the distinction before moving on."
-anki_rule = "Review selected CP cards; add at most 10-20 useful facts from misses only if the review queue stays manageable. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
+review_rule = "Review every wrong answer and uncertain correct answer. Redo misses closed-book about two days later; repeat unresolved concepts about a week later. Track first-pass and repeated-question results separately. A complete first pass is not the end of the work."
+anki_rule = "Throughout the day: due selected CP cards first, prioritizing transfusion, heme/coag and chemistry; then selected Sketchy Micro cards matching the evening lessons. Add at most 10-20 useful facts daily only if reviews stay manageable. Do not activate entire overlapping decks. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
 flexibility = "Targets are provisional. Log actual work privately, review the plan weekly, and change upcoming topics based on fresh performance. Do not stack missed days or treat resource completion as a pass guarantee."
-capacity = "Two protected hours are the daily foundation. A full question-bank pass may need additional sessions; measure pace before adding them."
+capacity = "Morning default: 5-6 AM targeted reading, 6-7 AM questions and explanations. Timed practice and final-light dates are exceptions. A full PathDojo pass plus incorrect-question redos needs more question/review time than that single hour is likely to provide. Extra daytime time versus shortening reading remains to be decided; no extra daytime block is assumed."
+videos = "Separate Sketchy block 9-10:30 PM starting Tuesday September 15. Rewatch all 118 Micro videos plus 43 selected Path and 38 Pharm: 199 videos, approximately 38 hours 8 minutes at normal speed. Individual lesson links are in each evening event. Finish assigned videos by October 16; October 17-18 are optional light recall, not new material."
+rest = "The evening-to-morning gap is only 6.5 hours before wind-down. Stop early where possible; trim optional videos rather than extending the night."
 gym = "The 5-7 AM study block intentionally overlaps the separate fitness routine, which stays unchanged. Use familiar audio or recall at the gym when practical; use seated study time for detailed questions, calculations and images. Count actual study completed, not two separate hours for overlapping events."
 
 [resources]

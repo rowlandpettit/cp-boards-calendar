@@ -1,5 +1,6 @@
 from copy import deepcopy
 from datetime import date, timedelta
+import json
 from pathlib import Path
 import sys
 import shutil
@@ -11,7 +12,7 @@ from icalendar import Calendar
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from generate_calendar import build_calendar, build_rss, build_sessions, generate, read_plan, write_pages
+from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, write_pages
 
 
 class StudyCalendarTests(unittest.TestCase):
@@ -53,7 +54,7 @@ class StudyCalendarTests(unittest.TestCase):
         self.assertEqual([e["UID"] for e in before], [e["UID"] for e in after])
         self.assertIn("Microbiology", str(after[1]["SUMMARY"]))
         self.assertEqual(after[1].decoded("DTEND").hour, 7)
-        self.assertEqual(int(after[1]["SEQUENCE"]), 2)
+        self.assertEqual(int(after[1]["SEQUENCE"]), self.plan["settings"]["sequence"] + 1)
 
     def test_cancel_preserves_occurrence(self):
         self.plan["overrides"]["2026-09-15"] = {"status": "CANCELLED"}
@@ -99,16 +100,83 @@ class StudyCalendarTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             shutil.copy(ROOT / "plan.toml", root)
+            shutil.copy(ROOT / "video_plan.json", root)
+            shutil.copy(ROOT / "video_catalog.tsv", root)
             shutil.copytree(ROOT / "templates", root / "templates")
             generate(root)
             public = root / "public"
-            self.assertEqual(len(Calendar.from_ical((public / "cp-study.ics").read_bytes()).walk("VEVENT")), 35)
+            self.assertEqual(len(Calendar.from_ical((public / "cp-study.ics").read_bytes()).walk("VEVENT")), 69)
             text = (public / "index.html").read_text()
             self.assertNotIn("@@", text)
             self.assertIn("05:00-07:00", text)
+            self.assertIn('id="study-2026-09-15"', text)
+            self.assertIn('id="video-2026-09-15"', text)
+            self.assertIn('href="https://app.sketchy.com/study/medical/chapter/gram-positive-cocci/lesson/staphylococcus-aureus"', text)
             self.plan["overrides"]["2026-09-14"]["goal"] = "<script>not executable</script>"
             write_pages(self.plan, build_sessions(self.plan), public, root)
             self.assertIn("&lt;script&gt;not executable&lt;/script&gt;", (public / "index.html").read_text())
+
+    def test_catalog_matches_browser_inventory(self):
+        catalog = read_video_catalog(ROOT / "video_catalog.tsv")
+        rows = sorted("\t".join(str(v[k]) for k in ("course", "minutes", "title", "path")) for v in catalog.values())
+        observed = "\n".join(rows)
+        fingerprint = 2166136261
+        for char in observed:
+            fingerprint = ((fingerprint ^ ord(char)) * 16777619) & 0xffffffff
+        # Snapshot of the 199 selected visible lesson rows on 2026-09-13, excluding progress.
+        self.assertEqual(len(observed), 20404)
+        self.assertEqual(fingerprint, 2846960811)
+        for course, count, minutes in (("Micro", 118, 948), ("Path", 43, 847), ("Pharm", 38, 493)):
+            subset = [v for v in catalog.values() if v["course"] == course]
+            self.assertEqual(len(subset), count)
+            self.assertEqual(sum(v["minutes"] for v in subset), minutes)
+
+    def test_evening_dates_runtime_links_and_stable_identity(self):
+        catalog = read_video_catalog(ROOT / "video_catalog.tsv")
+        allocation = json.loads((ROOT / "video_plan.json").read_text())
+        sessions = build_video_sessions(self.plan, allocation, catalog)
+        self.assertEqual(len(sessions), 34)
+        self.assertEqual(sum(s["video_minutes"] for s in sessions), 2288)
+        self.assertEqual(sum(len(s["videos"]) for s in sessions), 199)
+        for index, session in enumerate(sessions):
+            self.assertEqual(session["day"], date(2026, 9, 15) + timedelta(days=index))
+            self.assertEqual(session["start"].strftime("%H:%M"), "21:00")
+            self.assertEqual(session["end"].strftime("%H:%M"), "22:30")
+            self.assertLessEqual(session["video_minutes"], 80)
+            self.assertIsNone(session["start"].tzinfo)
+            self.assertEqual(session["left"], (self.plan["settings"]["exam_date"] - session["day"]).days)
+            for video in session["videos"]:
+                self.assertIn(video["url"], session["description"])
+            if session["day"] >= date(2026, 10, 17):
+                self.assertEqual(session["mode"], "light")
+                self.assertFalse(session["videos"])
+        morning = build_sessions(self.plan)
+        combined = sorted(morning + sessions, key=lambda s: s["start"])
+        self.assertEqual(len({s["uid"] for s in combined}), 69)
+        self.assertEqual(len({s["anchor"] for s in combined}), 69)
+        events = Calendar.from_ical(build_calendar(self.plan, combined)).walk("VEVENT")
+        self.assertEqual({str(e["UID"]) for e in events if str(e["UID"]).startswith("study-")}, {s["uid"] for s in morning})
+        self.assertEqual(len(ET.fromstring(build_rss(self.plan, combined)).findall("./channel/item")), 69)
+        changed = deepcopy(allocation)
+        changed["start"] = "20:30"
+        self.assertEqual([s["uid"] for s in sessions], [s["uid"] for s in build_video_sessions(self.plan, changed, catalog)])
+
+    def test_invalid_video_assignments_fail(self):
+        catalog = read_video_catalog(ROOT / "video_catalog.tsv")
+        allocation = json.loads((ROOT / "video_plan.json").read_text())
+        mutations = [
+            lambda a: a["sessions"][0].update(date="2026-10-19"),
+            lambda a: a["sessions"][0]["lessons"].append(a["sessions"][0]["lessons"][0]),
+            lambda a: a["sessions"][0]["lessons"].append("missing/lesson/missing"),
+            lambda a: a["sessions"][0]["lessons"].pop(),
+            lambda a: a.update(max_video_minutes=10),
+            lambda a: a.update(start="23:30"),
+        ]
+        for mutate in mutations:
+            changed = deepcopy(allocation)
+            mutate(changed)
+            with self.assertRaises(ValueError):
+                build_video_sessions(self.plan, changed, catalog)
 
 
 if __name__ == "__main__":

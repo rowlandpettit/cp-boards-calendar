@@ -1,0 +1,409 @@
+{
+  "source_checked": "2026-09-13",
+  "start": "21:00",
+  "duration_minutes": 90,
+  "max_video_minutes": 80,
+  "sessions": [
+    {
+      "date": "2026-09-15",
+      "kind": "watch",
+      "lessons": [
+        "gram-positive-cocci/lesson/staphylococcus-aureus",
+        "microcytic-anemias/lesson/microcytic-anemia-overview-thalassemias",
+        "cell-wall-membrane-active-antibiotics/lesson/penicillin",
+        "gram-positive-cocci/lesson/staphylococcus-epidermidis-saprophyticus",
+        "gram-positive-cocci/lesson/streptococcus-pyogenes-group-a-strep",
+        "cell-wall-membrane-active-antibiotics/lesson/nafcillin-oxacillin-methicillin-dicloxacillin"
+      ]
+    },
+    {
+      "date": "2026-09-16",
+      "kind": "watch",
+      "lessons": [
+        "microcytic-anemias/lesson/iron-deficiency-anemia-anemia-of-chronic-disease",
+        "gram-positive-cocci/lesson/streptococcus-agalactiae-group-b-strep",
+        "cell-wall-membrane-active-antibiotics/lesson/ampicillin-amoxicillin-piperacillin-ticarcillin",
+        "gram-positive-cocci/lesson/streptococcus-pneumoniae-viridans",
+        "gram-positive-cocci/lesson/enterococcus-faecium-faecalis",
+        "normocytic-macrocytic-anemias/lesson/extravascular-hemolysis-overview-rbc-membrane-defects"
+      ]
+    },
+    {
+      "date": "2026-09-17",
+      "kind": "watch",
+      "lessons": [
+        "gram-positive-cocci/lesson/streptococcus-gallolyticus-group-d-strep",
+        "gram-positive-bacilli/lesson/bacillus-anthracis-cereus",
+        "cell-wall-membrane-active-antibiotics/lesson/cephalosporins",
+        "gram-positive-bacilli/lesson/clostridium-tetani",
+        "normocytic-macrocytic-anemias/lesson/intravascular-hemolysis-overview-paroxysmal-nocturnal-hemoglobinuria-pnh",
+        "gram-positive-bacilli/lesson/clostridium-botulinum",
+        "normocytic-macrocytic-anemias/lesson/g6pd-deficiency-autoimmune-hemolytic-anemia-aiha"
+      ]
+    },
+    {
+      "date": "2026-09-18",
+      "kind": "watch",
+      "lessons": [
+        "gram-positive-bacilli/lesson/clostridium-perfringens",
+        "gram-positive-bacilli/lesson/clostridioides-difficile",
+        "cell-wall-membrane-active-antibiotics/lesson/monobactams-carbapenems",
+        "gram-positive-bacilli/lesson/corynebacterium-diphtheriae",
+        "normocytic-macrocytic-anemias/lesson/sickle-cell-disease",
+        "gram-positive-bacilli/lesson/listeria-monocytogenes",
+        "cell-wall-membrane-active-antibiotics/lesson/vancomycin",
+        "gram-positive-branching-filamentous-rods/lesson/actinomyces-israelii"
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "kind": "watch",
+      "lessons": [
+        "gram-positive-branching-filamentous-rods/lesson/nocardia-asteroides",
+        "gram-negative-cocci/lesson/neisseria-overview",
+        "gram-negative-cocci/lesson/neisseria-meningitidis",
+        "normocytic-macrocytic-anemias/lesson/megaloblastic-anemia-folate-deficiency-vitamin-b12-deficiency",
+        "cell-wall-membrane-active-antibiotics/lesson/daptomycin",
+        "gram-negative-cocci/lesson/neisseria-gonorrhoeae",
+        "gram-negative-cocci/lesson/moraxella-catarrhalis"
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "kind": "watch",
+      "lessons": [
+        "inhibitors-of-bacterial-protein-synthesis/lesson/tetracyclines",
+        "coagulopathies-platelet-disorders/lesson/quantitative-platelet-disorders",
+        "gram-negative-bacilli-enteric-tract/lesson/klebsiella-pneumoniae-enterobacter-spp-serratia-marcescens",
+        "gram-negative-bacilli-enteric-tract/lesson/salmonella-intro-to-salmonella-nts",
+        "inhibitors-of-bacterial-protein-synthesis/lesson/macrolides",
+        "gram-negative-bacilli-enteric-tract/lesson/salmonella-typhoidal-salmonella",
+        "gram-negative-bacilli-enteric-tract/lesson/shigella-spp"
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "kind": "watch",
+      "lessons": [
+        "coagulopathies-platelet-disorders/lesson/qualitative-platelet-disorders",
+        "inhibitors-of-bacterial-protein-synthesis/lesson/clindamycin",
+        "gram-negative-bacilli-enteric-tract/lesson/escherichia-coli-etec-ehec",
+        "coagulopathies-platelet-disorders/lesson/inherited-coagulation-defects",
+        "gram-negative-bacilli-enteric-tract/lesson/yersinia-enterocolitica-pestis",
+        "inhibitors-of-bacterial-protein-synthesis/lesson/chloramphenicol",
+        "gram-negative-bacilli-enteric-tract/lesson/campylobacter-jejuni"
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "kind": "watch",
+      "lessons": [
+        "gram-negative-bacilli-enteric-tract/lesson/vibrio-spp",
+        "inhibitors-of-bacterial-protein-synthesis/lesson/linezolid",
+        "coagulopathies-platelet-disorders/lesson/acquired-coagulation-defects",
+        "gram-negative-bacilli-enteric-tract/lesson/helicobacter-pylori",
+        "gram-negative-bacilli-enteric-tract/lesson/proteus-mirabilis",
+        "gram-negative-bacilli-enteric-tract/lesson/bacteroides-fragilis",
+        "inhibitors-of-bacterial-protein-synthesis/lesson/aminoglycosides",
+        "gram-negative-bacilli-respiratory-tract/lesson/bordetella-pertussis"
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "kind": "watch",
+      "lessons": [
+        "coagulopathies-platelet-disorders/lesson/acquired-inherited-thrombosis-syndromes",
+        "gram-negative-bacilli-respiratory-tract/lesson/haemophilus-influenzae",
+        "antimycobacterials/lesson/tuberculosis-drugs",
+        "gram-negative-bacilli-respiratory-tract/lesson/legionella-pneumophila",
+        "gram-negative-bacilli-respiratory-tract/lesson/pseudomonas-aeruginosa",
+        "gram-negative-bacilli-respiratory-tract/lesson/burkholderia-pseudomallei-cepacia-complex"
+      ]
+    },
+    {
+      "date": "2026-09-24",
+      "kind": "watch",
+      "lessons": [
+        "myeloid-disorders/lesson/myeloproliferative-neoplasms-myelodysplastic-syndromes",
+        "gram-negative-bacilli-zoonotics/lesson/bartonella-henselae",
+        "gram-negative-bacilli-zoonotics/lesson/brucella-spp",
+        "myeloid-disorders/lesson/acute-myeloid-leukemia-aml-chronic-myeloid-leukemia-cml",
+        "gram-negative-bacilli-zoonotics/lesson/francisella-tularensis",
+        "antimycobacterials/lesson/leprosy-drugs",
+        "gram-negative-bacilli-zoonotics/lesson/pasteurella-multocida",
+        "gram-negative-bacilli-zoonotics/lesson/anaplasma-phagocytophilum-ehrlichia-chaffeensis"
+      ]
+    },
+    {
+      "date": "2026-09-25",
+      "kind": "watch",
+      "lessons": [
+        "mycobacteria/lesson/mycobacterium-tuberculosis",
+        "other-antibiotics/lesson/trimethoprimsulfamethoxazole",
+        "myeloid-disorders/lesson/polycythemia",
+        "mycobacteria/lesson/mycobacterium-leprae",
+        "mycobacteria/lesson/mycobacterium-avium-intracellulare-mycobacterium-scrofulaceum-mycobacterium-marinum",
+        "other-antibiotics/lesson/fluoroquinolones"
+      ]
+    },
+    {
+      "date": "2026-09-26",
+      "kind": "watch",
+      "lessons": [
+        "lymphoid-plasma-cell-disorders/lesson/all-cll-hairy-cell-leukemia-adult-t-cell-leukemia",
+        "spirochetes/lesson/borrelia-burgdorferi",
+        "spirochetes/lesson/borrelia-recurrentis",
+        "spirochetes/lesson/leptospira-interrogans",
+        "spirochetes/lesson/treponema-pallidum",
+        "lymphoid-plasma-cell-disorders/lesson/hodgkin-lymphoma"
+      ]
+    },
+    {
+      "date": "2026-09-27",
+      "kind": "watch",
+      "lessons": [
+        "other-antibiotics/lesson/metronidazole",
+        "gram-indeterminate-bacteria/lesson/chlamydia-trachomatis-chlamydophila-pneumoniae-chlamydophila-psittaci",
+        "lymphoid-plasma-cell-disorders/lesson/non-hodgkin-lymphoma",
+        "antifungals/lesson/amphotericin-flucytosine",
+        "gram-indeterminate-bacteria/lesson/coxiella-burnetii",
+        "gram-indeterminate-bacteria/lesson/gardnerella-vaginalis",
+        "gram-indeterminate-bacteria/lesson/mycoplasma-pneumoniae",
+        "gram-indeterminate-bacteria/lesson/rickettsia-overview"
+      ]
+    },
+    {
+      "date": "2026-09-28",
+      "kind": "watch",
+      "lessons": [
+        "lymphoid-plasma-cell-disorders/lesson/plasma-cell-neoplasms",
+        "antifungals/lesson/azoles",
+        "gram-indeterminate-bacteria/lesson/rickettsia-prowazekii",
+        "gram-indeterminate-bacteria/lesson/rickettsia-rickettsii",
+        "acute-kidney-injury-1/lesson/renal-function-tests-acute-kidney-injury-aki",
+        "systemic-mycoses/lesson/histoplasma-capsulatum"
+      ]
+    },
+    {
+      "date": "2026-09-29",
+      "kind": "watch",
+      "lessons": [
+        "systemic-mycoses/lesson/blastomyces-dermatitidis",
+        "antifungals/lesson/griseofulvin-terbinafine-echinocandins",
+        "systemic-mycoses/lesson/coccidioides-immitis",
+        "systemic-mycoses/lesson/paracoccidioides-brasiliensis",
+        "volume-electrolyte-acid-base-disorders/lesson/osmolality-sodium-disorders",
+        "cutaneous-mycoses/lesson/malassezia-furfur",
+        "cutaneous-mycoses/lesson/epidermophyton-spp-trichophyton-spp-microsporum-spp-dermatophytes",
+        "cutaneous-mycoses/lesson/sporothrix-schenckii"
+      ]
+    },
+    {
+      "date": "2026-09-30",
+      "kind": "watch",
+      "lessons": [
+        "heart-failure-drugs/lesson/digoxin",
+        "opportunistic-fungal-infections/lesson/candida-albicans",
+        "opportunistic-fungal-infections/lesson/aspergillus-fumigatus",
+        "volume-electrolyte-acid-base-disorders/lesson/potassium-disorders",
+        "opportunistic-fungal-infections/lesson/cryptococcus-neoformans",
+        "opportunistic-fungal-infections/lesson/mucor-spp-rhizopus-spp-mucormycetes",
+        "opportunistic-fungal-infections/lesson/pneumocystis-jirovecii"
+      ]
+    },
+    {
+      "date": "2026-10-01",
+      "kind": "watch",
+      "lessons": [
+        "anticoagulants-thrombolytics/lesson/heparin-lmwh-fondaparinux-direct-thrombin-inhibitors-xa-inhibitors",
+        "volume-electrolyte-acid-base-disorders/lesson/calcium-disorders",
+        "rna-viruses-positive-sense/lesson/picornaviridae-overview",
+        "rna-viruses-positive-sense/lesson/poliovirus-picornaviridae",
+        "rna-viruses-positive-sense/lesson/coxsackievirus-a-b-picornaviridae",
+        "rna-viruses-positive-sense/lesson/rhinovirus-picornaviridae"
+      ]
+    },
+    {
+      "date": "2026-10-02",
+      "kind": "watch",
+      "lessons": [
+        "volume-electrolyte-acid-base-disorders/lesson/acid-base-disorders",
+        "rna-viruses-positive-sense/lesson/hepatitis-a-virus-picornaviridae",
+        "anticoagulants-thrombolytics/lesson/warfarin",
+        "rna-viruses-positive-sense/lesson/norovirus-norwalk-virus-caliciviridae",
+        "rna-viruses-positive-sense/lesson/flaviviridae-overview"
+      ]
+    },
+    {
+      "date": "2026-10-03",
+      "kind": "watch",
+      "lessons": [
+        "volume-electrolyte-acid-base-disorders/lesson/renal-tubular-acidosis-rta",
+        "rna-viruses-positive-sense/lesson/hepatitis-c-virus-flaviviridae",
+        "rna-viruses-positive-sense/lesson/coronavirus-coronaviridae",
+        "hypothalamic-pituitary-disorders/lesson/hypothalamic-pituitary-dysfunction-clinical-manifestations",
+        "rna-viruses-positive-sense/lesson/equine-encephalitis-viruses-chikungunya-virus-togaviridae"
+      ]
+    },
+    {
+      "date": "2026-10-04",
+      "kind": "watch",
+      "lessons": [
+        "anticoagulants-thrombolytics/lesson/antiplatelet-agents",
+        "rna-viruses-positive-sense/lesson/rubella-virus-matonaviridae",
+        "rna-viruses-positive-sense/lesson/hiv-overview-retroviridae",
+        "hypothalamic-pituitary-disorders/lesson/hyperpituitarism"
+      ]
+    },
+    {
+      "date": "2026-10-05",
+      "kind": "watch",
+      "lessons": [
+        "rna-viruses-positive-sense/lesson/hiv-life-cycle-retroviridae",
+        "rna-viruses-negative-sense/lesson/influenzavirus-orthomyxoviridae",
+        "hypothalamic-pituitary-disorders/lesson/diabetes-insipidus-siadh",
+        "rna-viruses-negative-sense/lesson/measles-mumps-parainfluenza-viruses-paramyxoviridae",
+        "rna-viruses-negative-sense/lesson/respiratory-syncytial-virus-human-metapneumovirus-pneumoviridae"
+      ]
+    },
+    {
+      "date": "2026-10-06",
+      "kind": "watch",
+      "lessons": [
+        "anticoagulants-thrombolytics/lesson/thrombolytics",
+        "adrenal-disorders/lesson/adrenal-insufficiency",
+        "rna-viruses-negative-sense/lesson/rabies-virus-rhabdoviridae",
+        "rna-viruses-negative-sense/lesson/ebolavirus-marburgvirus-filoviridae",
+        "anti-inflammatory/lesson/immunosuppressants",
+        "rna-viruses-negative-sense/lesson/hantavirus-california-encephalitis-rift-valley-fever-viruses-bunyaviridae",
+        "rna-viruses-negative-sense/lesson/lymphocytic-choriomeningitis-virus-arenaviridae"
+      ]
+    },
+    {
+      "date": "2026-10-07",
+      "kind": "watch",
+      "lessons": [
+        "adrenal-disorders/lesson/congenital-adrenal-hyperplasia-cah",
+        "anesthetics-analgesics/lesson/opioids-naloxone-naltrexone",
+        "rna-viruses-negative-sense/lesson/rotavirus-colorado-tick-fever-virus-reoviridae",
+        "dna-viruses/lesson/herpes-simplex-virus-types-1-2-herpesviridae"
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "kind": "watch",
+      "lessons": [
+        "dna-viruses/lesson/cytomegalovirus-herpesviridae",
+        "adrenal-disorders/lesson/adrenocortical-hyperfunction-hyperaldosteronism-hypercortisolism",
+        "dna-viruses/lesson/epstein-barr-virus-herpesviridae",
+        "antidepressants-anxiolytics/lesson/tricyclic-antidepressants",
+        "dna-viruses/lesson/varicella-zoster-virus-herpesviridae"
+      ]
+    },
+    {
+      "date": "2026-10-09",
+      "kind": "watch",
+      "lessons": [
+        "adrenal-disorders/lesson/cushings-syndrome",
+        "dna-viruses/lesson/hhv-6-roseola-herpesviridae",
+        "dna-viruses/lesson/hhv-8-kaposis-sarcoma-herpesviridae",
+        "adrenal-disorders/lesson/pheochromocytoma-neuroblastoma",
+        "dna-viruses/lesson/jc-polyomavirus-bk-polyomavirus-polyomaviridae",
+        "mood-stabilizers-antiepileptic-drugs/lesson/lithium"
+      ]
+    },
+    {
+      "date": "2026-10-10",
+      "kind": "watch",
+      "lessons": [
+        "dna-viruses/lesson/human-papillomavirus-papillomaviridae",
+        "diabetes-2/lesson/diabetes-mellitus-pathogenesis-acute-clinical-manifestations",
+        "dna-viruses/lesson/parvovirus-b19-parvoviridae",
+        "sedative-hypnotics/lesson/benzodiazepines-flumazenil",
+        "dna-viruses/lesson/adenovirus-adenoviridae"
+      ]
+    },
+    {
+      "date": "2026-10-11",
+      "kind": "watch",
+      "lessons": [
+        "dna-viruses/lesson/smallpox-virus-cowpox-virus-and-molluscum-contagiosum-virus-poxviridae",
+        "dna-viruses/lesson/hepatitis-b-viral-basics-infectious-diseases-hepadnaviridae",
+        "diabetes-2/lesson/diabetic-ketoacidosis-dka-hyperosmolar-hyperglycemic-state-hhs",
+        "dna-viruses/lesson/hepatitis-b-viral-life-cycle-hepadnaviridae",
+        "thyroid-parathyroid/lesson/hypothyroidism-overview-hashimotos-thyroiditis"
+      ]
+    },
+    {
+      "date": "2026-10-12",
+      "kind": "watch",
+      "lessons": [
+        "sedative-hypnotics/lesson/barbiturates",
+        "protozoa-of-the-intestinal-tract/lesson/giardia-lamblia",
+        "protozoa-of-the-intestinal-tract/lesson/entamoeba-histolytica",
+        "protozoa-of-the-intestinal-tract/lesson/cryptosporidium-spp",
+        "protozoa-of-the-cns/lesson/toxoplasma-gondii",
+        "thyroid-parathyroid/lesson/hyperthyroidism-overview-graves-disease",
+        "pharmacokinetic-basics/lesson/plasma-concentration-therapeutic-range"
+      ]
+    },
+    {
+      "date": "2026-10-13",
+      "kind": "watch",
+      "lessons": [
+        "protozoa-of-the-cns/lesson/trypanosoma-brucei",
+        "protozoa-of-the-cns/lesson/naegleria-fowleri",
+        "thyroid-parathyroid/lesson/parathyroid-gland-disorders",
+        "distribution/lesson/drug-distribution-protein-binding",
+        "protozoa-of-the-blood/lesson/trypanosoma-cruzi"
+      ]
+    },
+    {
+      "date": "2026-10-14",
+      "kind": "watch",
+      "lessons": [
+        "protozoa-of-the-blood/lesson/babesia-spp",
+        "protozoa-of-the-blood/lesson/plasmodium-infection-lifecycle",
+        "protozoa-of-the-blood/lesson/plasmodium-treatment-ppx",
+        "distribution/lesson/volume-of-distribution",
+        "thyroid-parathyroid/lesson/multiple-endocrine-neoplasia-men",
+        "protozoa-of-the-blood/lesson/leishmania-braziliensis-donovani",
+        "protozoa-other-tissue/lesson/trichomonas-vaginalis"
+      ]
+    },
+    {
+      "date": "2026-10-15",
+      "kind": "watch",
+      "lessons": [
+        "immunodeficiency/lesson/b-cell-disorders-digeorge-syndrome",
+        "metabolism/lesson/intro-to-cyp450-enzymes",
+        "helminths-nematodes/lesson/intestinal-nematodes-enterobius-ancylostoma-necator-ascaris-strongyloides-and-trichinella",
+        "helminths-nematodes/lesson/tissue-nematodes-dracunculus-medinensis-wuchereria-bancrofti-onchocerca-volvulus-toxocara-canis-and-loa-loa",
+        "immunodeficiency/lesson/combined-b--t-cell-disorders",
+        "elimination/lesson/clearance-area-under-the-curve"
+      ]
+    },
+    {
+      "date": "2026-10-16",
+      "kind": "watch",
+      "lessons": [
+        "helminths-trematodes-cestodes/lesson/cestodes",
+        "immunodeficiency/lesson/complement-system-disorders",
+        "elimination/lesson/elimination-rate-constant-half-life-steady-state",
+        "helminths-trematodes-cestodes/lesson/trematodes",
+        "immunodeficiency/lesson/phagocytic-cell-disorders",
+        "ectoparasites/lesson/scabies-lice-crabs"
+      ]
+    },
+    {
+      "date": "2026-10-17",
+      "kind": "light",
+      "lessons": []
+    },
+    {
+      "date": "2026-10-18",
+      "kind": "light",
+      "lessons": []
+    }
+  ]
+}

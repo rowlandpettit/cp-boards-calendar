@@ -9,13 +9,15 @@ Daily protected study blocks for the CP-only examination on October 19, 2026.
 - [HTTPS calendar feed](https://rowlandpettit.com/cp-boards-calendar/cp-study.ics)
 - [RSS feed](https://rowlandpettit.com/cp-boards-calendar/rss.xml), for RSS readers rather than Calendar
 
-The 35 study blocks run every day from September 14 through October 18, 5:00-7:00 AM as floating local times, following the workout calendar's travel behavior. Each date has a stable event ID and a title such as `CP Boards | 35 days left | Mixed baseline`. The countdown means days between that study date and the examination, so future events are already labeled correctly without a daily server job. No study block is generated on examination day.
+The 35 morning blocks run September 14-October 18, 5:00-7:00 AM as floating local times. Another 34 separate Sketchy blocks run September 15-October 18, 9:00-10:30 PM, in the same subscription. The final two evenings are optional light recall. Each occurrence has a stable date-based ID and countdown to October 19; no event is generated on examination day.
 
 Event notes include the objective, a realistic two-hour routine, selected materials, resource links and the adaptation policy. The main aim is learning from questions and recurring gaps, not completing every bank and deck. [Study strategy](context.md).
 
 ## Edit and Sync
 
 Edit `plan.toml`, then run `make validate`, commit and push to `main`. GitHub Actions regenerates the public feeds and deploys GitHub Pages. Calendar subscribers receive updates on their configured refresh schedule; updates are not instantaneous.
+
+`video_catalog.tsv` contains the 199 selected lesson titles, rounded durations and directly observed URL paths, with no private progress or paid content. `video_plan.json` freezes the dated lesson assignments so normal builds cannot reshuffle completed nights. Edit upcoming assignments explicitly and keep every selected lesson assigned exactly once. `scripts/allocate_videos.py` is only an initial-allocation utility and refuses to overwrite an existing file. Each evening event includes its individual video URLs, and the corresponding web section provides clickable lesson links.
 
 - Change `weekly` for the default topic rotation.
 - Use a dated `overrides` entry to change one day's `topic`, `note`, `start`, `duration_minutes`, `question_target` or `mode` (`practice`, `timed`, `light`).
