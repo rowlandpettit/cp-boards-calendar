@@ -8,8 +8,8 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 4
-updated_at = 2026-09-13T19:40:16Z
+sequence = 5
+updated_at = 2026-09-13T20:13:33Z
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
@@ -22,7 +22,7 @@ question_plan = "Two required question banks only: 885 remaining PathDojo questi
 bank_selection = "Use mixed CP and relevant shared categories each day. PathDojo: Tutorial Mode, New (Unanswered) Questions, all CP plus shared categories in the CP subscription. ASCP: CP Practice Questions for all six CP domains; AP/CP Practice Questions only for AP- Bone Marrow Biopsy and AP- Lymph Node and Spleen. Select Random, not Easiest. Never Select All in the combined AP/CP course. ASCP's CP-only screen excludes these two relevant hematopathology groups."
 deduplication = "Bank links open setup pages, not pre-created or date-filtered exams. Create a set only when ready to do it. Record its date, identifier and completed unique questions privately. ASCP's first-use setup did not show an unanswered filter; verify available history/filtering as you work and use the seen-question ledger to avoid counting repeats as new. The 125-question ASCP CP simulation reuses bank content and is optional instead of other repeat practice, not an additional 125 unique questions."
 review_capacity = "The 658 first-redo allowance covers 60% of the planned first pass, rounded up per bank. A further 60% miss rate on those redos would require 395 repeat attempts, exceeding the 320-slot final buffer by 75, before uncertainty review. Review actual queue size every Sunday and move repeat work earlier or add daytime capacity if needed. No finite count guarantees readiness. PATHPrimer and Arinsburg/Jhang are targeted references, not third required full banks."
-videos = "Separate Sketchy block 9-10:30 PM starting Tuesday September 15. Rewatch all 118 Micro videos plus 43 selected Path and 38 Pharm: 199 videos, approximately 38 hours 8 minutes at normal speed. Individual lesson links are in each evening event. Finish assigned videos by October 16; October 17-18 are optional light recall, not new material."
+videos = "Separate video block 9-10:30 PM starting Tuesday September 15: all 17 Blood Bank Guy teaching-library videos, all seven Morgan pathCast microbiology lectures, all 118 Sketchy Micro lessons, plus three chemistry Path and three drug-monitoring Pharm lessons. That is 148 distinct videos in 150 assignments, about 40 hours 8 minutes using rounded normal-speed budgets. Last Minute Essentials is split across October 13, 14 and 16 with exact timestamp links. October 15 is a catch-up evening; October 17-18 stay light. The other 75 previously selected Sketchy Path/Pharm videos remain linked as optional, not additional quotas. Every required video finishes by October 16."
 rest = "The evening-to-morning gap is only 6.5 hours before wind-down. Stop early where possible; trim optional videos rather than extending the night."
 gym = "The 5-7 AM study block intentionally overlaps the separate fitness routine, which stays unchanged. Use familiar audio or recall at the gym when practical; use seated study time for detailed questions, calculations and images. Count actual study completed, not two separate hours for overlapping events."
 

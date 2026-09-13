@@ -9,7 +9,9 @@ from datetime import date, datetime, time, timedelta, timezone
 from email.utils import format_datetime
 import html
 import json
+from math import ceil
 from pathlib import Path
+import re
 import tomllib
 from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
@@ -160,6 +162,48 @@ def read_video_catalog(path: Path) -> dict:
     return catalog
 
 
+def timestamp(seconds: int) -> str:
+    hours, remaining = divmod(seconds, 3600)
+    minutes, seconds = divmod(remaining, 60)
+    return f"{hours:02}:{minutes:02}:{seconds:02}"
+
+
+def read_lecture_catalog(path: Path) -> dict:
+    catalog, seen = {}, set()
+    for video in json.loads(path.read_text())["videos"]:
+        key = video["id"]
+        if not re.fullmatch(r"(?:bbguy|morgan)-[a-z0-9]+", key) or key in seen:
+            raise ValueError("Invalid or duplicate lecture ID")
+        seen.add(key)
+        if video["course"] not in {"Blood Bank Guy", "Morgan"} or not re.fullmatch(r"[A-Za-z0-9_-]{11}", video["youtube_id"]):
+            raise ValueError("Invalid lecture provider or YouTube ID")
+        source = urlparse(video["source_url"])
+        if source.scheme != "https" or source.netloc not in {"www.bbguy.org", "www.microbeswithmorgan.com"}:
+            raise ValueError("Invalid lecture source")
+        seconds = video["seconds"]
+        boundaries = video.get("part_ends", [seconds])
+        if type(seconds) is not int or seconds <= 0 or not boundaries or boundaries[-1] != seconds:
+            raise ValueError("Lecture parts must cover the full runtime")
+        start = 0
+        for index, end in enumerate(boundaries, 1):
+            if type(end) is not int or not start < end <= seconds or end - start > 80 * 60:
+                raise ValueError("Invalid lecture segment")
+            part_key = key if len(boundaries) == 1 else f"{key}-part{index}"
+            title = video["title"]
+            url = "https://www.youtube.com/watch?v=" + video["youtube_id"]
+            if len(boundaries) > 1:
+                title += f" | Part {index}/{len(boundaries)}: {timestamp(start)}-{timestamp(end)}"
+                url += f"&t={start}s"
+            catalog[part_key] = dict(video, path=part_key, title=title, url=url,
+                                     minutes=ceil((end - start) / 60), start_seconds=start, end_seconds=end)
+            start = end
+    return catalog
+
+
+def read_all_videos(root: Path = ROOT) -> dict:
+    return read_video_catalog(root / "video_catalog.tsv") | read_lecture_catalog(root / "lecture_catalog.json")
+
+
 def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[dict]:
     settings = plan["settings"]
     start_time = time.fromisoformat(allocation["start"])
@@ -167,8 +211,12 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
     limit = int(allocation["max_video_minutes"])
     if start_time.tzinfo or not 0 < limit <= duration - 10 or duration > 180:
         raise ValueError("Videos must leave at least ten minutes for recall")
-    result, seen_dates, seen_lessons = [], set(), set()
-    for item in allocation["sessions"]:
+    optional_list = allocation.get("optional_lessons", [])
+    optional = set(optional_list)
+    if len(optional) != len(optional_list) or any(key not in catalog or catalog[key]["course"] not in {"Path", "Pharm"} for key in optional):
+        raise ValueError("Only selected Sketchy Path/Pharm can be moved to optional")
+    result, seen_dates, seen_lessons, lecture_positions = [], set(), set(), {}
+    for item in sorted(allocation["sessions"], key=lambda item: item["date"]):
         day = date.fromisoformat(item["date"])
         if day in seen_dates or not settings["start_date"] <= day < settings["exam_date"]:
             raise ValueError("Duplicate or out-of-range video date")
@@ -178,8 +226,13 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
             raise ValueError("Invalid video session kind")
         videos = []
         for key in item["lessons"]:
-            if key in seen_lessons or key not in catalog:
+            if key in seen_lessons or key not in catalog or key in optional:
                 raise ValueError("Duplicate or unknown assigned lesson")
+            video = catalog[key]
+            if "id" in video:
+                if video["start_seconds"] != lecture_positions.get(video["id"], 0):
+                    raise ValueError("Lecture parts must be watched in order without gaps")
+                lecture_positions[video["id"]] = video["end_seconds"]
             seen_lessons.add(key)
             videos.append(catalog[key])
         minutes = sum(v["minutes"] for v in videos)
@@ -191,10 +244,11 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
             raise ValueError("Video block crosses midnight")
         left = (settings["exam_date"] - day).days
         countdown = f"{left} {'day' if left == 1 else 'days'} left"
-        topic = "Sketchy | " + (f"{len(videos)} videos" if videos else "Light recall" if kind == "light" else "Catch-up + recall")
+        providers = list(dict.fromkeys(v["course"] if v["course"] in {"Blood Bank Guy", "Morgan"} else "Sketchy" for v in videos))
+        topic = (" + ".join(providers) + f" | {len(videos)} videos/parts" if videos else "Videos | Light recall" if kind == "light" else "Videos | Catch-up + recall")
         anchor = f"video-{day.isoformat()}"
         base = settings["site_url"].rstrip("/")
-        goal = ("Rewatch all assigned lessons, including those previously marked completed. Explain a diagnostic distinction after each."
+        goal = ("Watch every listed video or exact timestamp range. Rewatch Sketchy even if previously marked completed. Pause to interpret panels or images before the answer; explain a diagnostic distinction after each. Timestamp links set the start only: stop at the listed end."
                 if videos else "No new lessons. Optional 15-20 minutes of familiar recall, then stop early and protect rest."
                 if kind == "light" else "Use this buffer for unfinished assigned lessons or recurring weak concepts. Do not add a new course.")
         links = "\n\n".join(f"{i}. [{v['course']}] {v['title']} (~{v['minutes']} min)\n{v['url']}"
@@ -203,20 +257,24 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
                  "TODAY\n" + goal,
                  f"SESSION\n{start:%H:%M}-{end:%H:%M} reserved. Approximately {minutes} minutes of video at normal speed; {duration - minutes} minutes remain for pauses, recall and a brief log. Displayed durations are rounded, not second-exact." if videos else f"SESSION\n{start:%H:%M}-{end:%H:%M} reserved; unused time is optional.",
                  "INDIVIDUAL VIDEO LINKS\n" + links if links else "Previous dated lesson links: " + base + "/",
-                 "MATERIALS\nAll Sketchy Micro plus selected CP-focused Path/Pharm. Unit tests are not counted as videos. These lessons support, but do not replace, laboratory methods, transfusion, molecular and management practice.",
+                 "MATERIALS\nAll 17 Blood Bank Guy teaching-library videos, all seven Morgan pathCast microbiology lectures, all 118 Sketchy Micro lessons and six selected chemistry/monitoring Path/Pharm lessons. The remaining 75 previously selected Path/Pharm lessons are optional, not extra nightly requirements. Full library: " + base + "/#video-library",
                  "FLEXIBLE PLAN\nStop at the time limit. Record unfinished lessons privately and move them to upcoming dates; do not automatically double the next night. Reduce lower-priority Path/Pharm before displacing question review or rest.",
                  "Next-day Anki: selected cards matching these lessons, after due CP reviews; avoid duplicating whole decks.",
                  "The 22:30 end and 05:00 start leave only 6.5 hours between blocks before wind-down. Finish early when possible; do not extend to catch up.",
                  "Study context: " + base + "/context.html"]
         if any("[Old Version]" in v["title"] for v in videos):
             notes.insert(4, "VERSION NOTE\nThe Hepatitis B life-cycle lesson is labeled Old Version by Sketchy. It is included for the requested full rewatch; use the current lesson and authoritative current references if details conflict.")
+        if "Blood Bank Guy" in providers:
+            notes.insert(4, "BLOOD BANK GUY\nThe teaching archive dates mostly to 2011-2014; Last Minute Essentials is from 2024. Check current guidance for changed policies, donor testing and terminology. Source pages include available handouts and corrections; for Antibody ID 2, work the handout panels before the explanation.\n" + "\n".join(dict.fromkeys(v["source_url"] for v in videos if v["course"] == "Blood Bank Guy")))
+        if "Morgan" in providers:
+            notes.insert(4, "MORGAN COMPANION MATERIAL\nThese are 2020-2021 recordings, not 2026 videos. Use the 2026 slides for updated terminology and testing details; slide review comes from the remaining recall time, not an additional full reading assignment.\n" + "\n".join(dict.fromkeys(v["source_url"] for v in videos if v["course"] == "Morgan")))
         result.append(dict(day=day, start=start, end=end, left=left,
                            title=f"CP Boards | {countdown} | {topic}", goal=goal,
-                           materials="Sketchy", description="\n\n".join(notes), status="CONFIRMED",
+                           materials=" + ".join(providers), description="\n\n".join(notes), status="CONFIRMED",
                            mode=kind, url=base + "/#" + anchor, context_url=base + "/context.html",
                            uid=f"{anchor}@{settings['namespace']}", anchor=anchor,
                            videos=videos, video_minutes=minutes))
-    if seen_lessons != set(catalog):
+    if seen_lessons != set(catalog) - optional:
         raise ValueError("Every selected lesson must have one dated assignment")
     return sorted(result, key=lambda s: s["start"])
 
@@ -271,6 +329,32 @@ def build_rss(plan: dict, sessions: list[dict]) -> bytes:
     return ET.tostring(root, encoding="utf-8", xml_declaration=True)
 
 
+def video_library(catalog: dict, allocation: dict, sessions: list[dict]) -> str:
+    escape = html.escape
+    optional = set(allocation.get("optional_lessons", []))
+    assignments = {v["path"]: session for session in sessions for v in session.get("videos", [])}
+    groups = []
+    for course in ("Blood Bank Guy", "Morgan", "Micro", "Path", "Pharm"):
+        videos = {}
+        for key, video in catalog.items():
+            if video["course"] == course:
+                videos.setdefault(video.get("id", key), []).append(video)
+        links = []
+        for parts in videos.values():
+            video = parts[0]
+            assigned = [assignments[p["path"]] for p in parts if p["path"] in assignments]
+            title = video["title"].split(" | Part ")[0]
+            url = video["url"].split("&t=")[0]
+            timing = timestamp(video["seconds"]) if "seconds" in video else f"~{video['minutes']} min"
+            dates = ", ".join(f'<a href="#{s["anchor"]}">{s["day"]:%b %d}</a>' for s in assigned)
+            label = "Optional, not assigned" if video["path"] in optional else dates
+            source = (f' | <a href="{escape(video["source_url"], quote=True)}">2026 slides</a>' if course == "Morgan"
+                      else f' | <a href="{escape(video["source_url"], quote=True)}">Source / handouts / corrections</a>' if course == "Blood Bank Guy" else "")
+            links.append(f'<li><a href="{escape(url, quote=True)}">{escape(title)}</a> <small>{timing}</small><br>{label}{source}</li>')
+        groups.append(f'<details class="video-group"><summary><span>{escape(course)} ({len(videos)} videos)</span></summary><ul>{"".join(links)}</ul></details>')
+    return "".join(groups)
+
+
 def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROOT) -> None:
     settings = plan["settings"]
     base = settings["site_url"].rstrip("/")
@@ -281,7 +365,7 @@ def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROO
         lesson_links = ""
         if session.get("videos"):
             lesson_links = '<ol class="lesson-links">' + "".join(
-                f'<li><a href="{escape(v["url"], quote=True)}">{escape(v["title"])}</a> <small>{v["minutes"]} min</small></li>'
+                f'<li><a href="{escape(v["url"], quote=True)}">[{escape(v["course"])}] {escape(v["title"])}</a> <small>~{v["minutes"]} min</small></li>'
                 for v in session["videos"]) + "</ol>"
         if session.get("question_links") and session["mode"] != "light":
             lesson_links += '<nav class="question-links" aria-label="Question bank setup">' + "".join(
@@ -295,14 +379,16 @@ def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROO
     schedule = f"{default_start:%H:%M}-{default_end:%H:%M} local daily; {settings['start_date']:%B %d}-{sessions[-1]['day']:%B %d}"
     evenings = [s for s in sessions if "videos" in s]
     if evenings:
-        schedule += f". Sketchy {evenings[0]['start']:%H:%M}-{evenings[0]['end']:%H:%M}, {evenings[0]['day']:%B %d}-{evenings[-1]['day']:%B %d}; final two nights light"
+        schedule += f". Videos {evenings[0]['start']:%H:%M}-{evenings[0]['end']:%H:%M}, {evenings[0]['day']:%B %d}-{evenings[-1]['day']:%B %d}; final two nights light"
     tokens = {"@@BASE@@": escape(base), "@@EXAM@@": settings["exam_date"].isoformat(),
               "@@EXAM_LABEL@@": settings["exam_date"].strftime("%B %d, %Y"),
               "@@SCHEDULE@@": escape(schedule), "@@WEBCAL@@": escape(base.replace("https://", "webcal://", 1) + "/cp-study.ics"),
               "@@EVENTS@@": "\n".join(entries), "@@COUNT@@": str(len(sessions)),
               "@@REPO@@": escape(settings["repository_url"]),
               "@@OBJECTIVE@@": escape(plan["strategy"]["objective"]),
-              "@@QUESTION_SUMMARY@@": ''.join(f'<p>{escape(plan["strategy"][key])}</p>' for key in ("question_plan", "capacity"))}
+              "@@QUESTION_SUMMARY@@": ''.join(f'<p>{escape(plan["strategy"][key])}</p>' for key in ("question_plan", "capacity")),
+              "@@VIDEO_SUMMARY@@": escape(plan["strategy"]["videos"]),
+              "@@VIDEO_LIBRARY@@": video_library(read_all_videos(root), json.loads((root / "video_plan.json").read_text()), sessions)}
     for token, value in tokens.items():
         template = template.replace(token, value)
     (public / "index.html").write_text(template, encoding="utf-8")
@@ -321,7 +407,7 @@ def generate(root: Path = ROOT) -> list[dict]:
     questions = read_question_plan(root / "question_plan.csv", plan)
     sessions = build_sessions(plan, questions)
     allocation = json.loads((root / "video_plan.json").read_text())
-    sessions += build_video_sessions(plan, allocation, read_video_catalog(root / "video_catalog.tsv"))
+    sessions += build_video_sessions(plan, allocation, read_all_videos(root))
     sessions.sort(key=lambda s: s["start"])
     public = root / "public"
     public.mkdir(exist_ok=True)

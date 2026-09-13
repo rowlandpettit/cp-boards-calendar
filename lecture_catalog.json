@@ -1,0 +1,32 @@
+{
+  "checked_on": "2026-09-13",
+  "duration_source": "YouTube public player metadata, lengthSeconds; no media downloaded",
+  "bbguy_scope": "All 17 teaching videos linked from https://www.bbguy.org/education/videos/ on the checked date, including Last Minute Essentials. This does not include the separate podcast archive.",
+  "morgan_scope": "All seven recorded lectures in the official pathCast Microbiology playlist. Recordings are from 2020-2021; Morgan's 2026 website posts are slide decks, not new recordings.",
+  "videos": [
+    {"id":"bbguy-bloodgroups","course":"Blood Bank Guy","title":"Blood Groups Overview","seconds":4478,"youtube_id":"ogr90JOvsI4","source_url":"https://www.bbguy.org/education/videos/bloodgroups/"},
+    {"id":"bbguy-pretransfusion","course":"Blood Bank Guy","title":"Pretransfusion Testing","seconds":4199,"youtube_id":"ORhL_ictvFY","source_url":"https://www.bbguy.org/education/videos/pretransfusion/"},
+    {"id":"bbguy-antibodyid1","course":"Blood Bank Guy","title":"Antibody ID 1: The Basics","seconds":3712,"youtube_id":"mvGC5M0ICCs","source_url":"https://www.bbguy.org/education/videos/antibodyid1/"},
+    {"id":"bbguy-antibodyid2","course":"Blood Bank Guy","title":"Antibody ID 2: Basic Cases","seconds":4147,"youtube_id":"goKOHYgviSY","source_url":"https://www.bbguy.org/education/videos/antibodyid2/"},
+    {"id":"bbguy-kell","course":"Blood Bank Guy","title":"Kell Kills!","seconds":3003,"youtube_id":"8xQyuJCxenQ","source_url":"https://www.bbguy.org/education/videos/kellkills/"},
+    {"id":"bbguy-bombay","course":"Blood Bank Guy","title":"What the H? (Bombay Phenotype)","seconds":2309,"youtube_id":"sYa-HamM4NU","source_url":"https://www.bbguy.org/education/videos/whattheh/"},
+    {"id":"bbguy-lewis","course":"Blood Bank Guy","title":"Fun with the Lewis System","seconds":2171,"youtube_id":"Um2Y0a2mqj0","source_url":"https://www.bbguy.org/education/videos/lewis/"},
+    {"id":"bbguy-dvariants","course":"Blood Bank Guy","title":"Weak in the D's","seconds":2463,"youtube_id":"JDQy6LyIegY","source_url":"https://www.bbguy.org/education/videos/dvariants/"},
+    {"id":"bbguy-acquiredb","course":"Blood Bank Guy","title":"Acquired B Phenotype","seconds":722,"youtube_id":"GE9Ks2VPjPo","source_url":"https://www.bbguy.org/education/videos/acquiredb/"},
+    {"id":"bbguy-rhig","course":"Blood Bank Guy","title":"RhIG Dosage","seconds":599,"youtube_id":"s2mc12g_fxU","source_url":"https://www.bbguy.org/education/videos/rhigdosage/"},
+    {"id":"bbguy-leukoreduce","course":"Blood Bank Guy","title":"Why Leukoreduce?","seconds":600,"youtube_id":"si8zlHq4Hsw","source_url":"https://www.bbguy.org/education/videos/whylr/"},
+    {"id":"bbguy-irradiate","course":"Blood Bank Guy","title":"Why Irradiate?","seconds":596,"youtube_id":"CfPeYP10bjE","source_url":"https://www.bbguy.org/education/videos/whyirradiate/"},
+    {"id":"bbguy-reactionworkup","course":"Blood Bank Guy","title":"Transfusion Reaction Workup","seconds":1961,"youtube_id":"aomh_tiby9c","source_url":"https://www.bbguy.org/education/videos/txrxnworkup/"},
+    {"id":"bbguy-reactions","course":"Blood Bank Guy","title":"Transfusion Reactions","seconds":4160,"youtube_id":"TPVMnnUvU4M","source_url":"https://www.bbguy.org/education/videos/txrxns/"},
+    {"id":"bbguy-ttd1","course":"Blood Bank Guy","title":"Intro to Transfusion-transmitted Disease Testing","seconds":1446,"youtube_id":"2S5DX7pqnG4","source_url":"https://www.bbguy.org/education/videos/ttd1of2/"},
+    {"id":"bbguy-ttd2","course":"Blood Bank Guy","title":"Transfusion-transmitted Diseases","seconds":3163,"youtube_id":"CgxgEJz1fWI","source_url":"https://www.bbguy.org/education/videos/ttd2of2/"},
+    {"id":"bbguy-lastminute","course":"Blood Bank Guy","title":"Last Minute Essentials for Pathology Residents (2024)","seconds":10740,"part_ends":[3600,7200,10740],"youtube_id":"zc8uiuLX83Q","source_url":"https://www.bbguy.org/education/videos/"},
+    {"id":"morgan-bacteriology1","course":"Morgan","title":"Bacteriology I","seconds":3960,"youtube_id":"plmdIUsqCq4","source_url":"https://www.microbeswithmorgan.com/2026/03/bacteriology-update-part-1.html"},
+    {"id":"morgan-bacteriology2","course":"Morgan","title":"Bacteriology II","seconds":4138,"youtube_id":"yC4fEZhAtMQ","source_url":"https://www.microbeswithmorgan.com/2026/03/bacteriology-part-2-2026.html"},
+    {"id":"morgan-mycobacteriology","course":"Morgan","title":"Mycobacteriology","seconds":3924,"youtube_id":"VSmDAwPh8ew","source_url":"https://www.microbeswithmorgan.com/2026/03/mycobacteriology-update-2026.html"},
+    {"id":"morgan-mycology1","course":"Morgan","title":"Mycology I: Introduction and Dimorphic Fungi","seconds":4437,"youtube_id":"hULry4ePQKs","source_url":"https://www.microbeswithmorgan.com/2026/03/mycology-part-1-2026.html"},
+    {"id":"morgan-mycology2","course":"Morgan","title":"Mycology II: Yeast, Cutaneous, Subcutaneous and Opportunistic Fungi","seconds":4756,"youtube_id":"3-gGXO_NqwA","source_url":"https://www.microbeswithmorgan.com/2026/03/mycology-part-2-2026.html"},
+    {"id":"morgan-parasitology","course":"Morgan","title":"Parasitology","seconds":4105,"youtube_id":"AKaq02B5-AA","source_url":"https://www.microbeswithmorgan.com/2026/04/parasitology-update-2026.html"},
+    {"id":"morgan-virology","course":"Morgan","title":"Virology","seconds":4290,"youtube_id":"DXqn2lblMZs","source_url":"https://www.microbeswithmorgan.com/2026/03/virology-review-2026_30.html"}
+  ]
+}

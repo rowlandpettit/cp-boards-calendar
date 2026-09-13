@@ -13,7 +13,7 @@ from icalendar import Calendar
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, write_pages
+from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, read_lecture_catalog, read_all_videos, write_pages
 from question_workload import read_question_plan, estimated_misses
 
 
@@ -104,6 +104,7 @@ class StudyCalendarTests(unittest.TestCase):
             shutil.copy(ROOT / "plan.toml", root)
             shutil.copy(ROOT / "video_plan.json", root)
             shutil.copy(ROOT / "video_catalog.tsv", root)
+            shutil.copy(ROOT / "lecture_catalog.json", root)
             shutil.copy(ROOT / "question_plan.csv", root)
             shutil.copytree(ROOT / "templates", root / "templates")
             generate(root)
@@ -118,6 +119,10 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertIn('href="https://pathdojo.com/exams/create/?exam_type=tutorial"', text)
             self.assertEqual((public / "question-plan.csv").read_bytes(), (root / "question_plan.csv").read_bytes())
             self.assertIn('href="https://app.sketchy.com/study/medical/chapter/gram-positive-cocci/lesson/staphylococcus-aureus"', text)
+            self.assertIn('Blood Bank Guy (17 videos)', text)
+            self.assertIn('Morgan (7 videos)', text)
+            self.assertIn('Optional, not assigned', text)
+            self.assertIn('watch?v=zc8uiuLX83Q&amp;t=3600s', text)
             self.plan["overrides"]["2026-09-14"]["goal"] = "<script>not executable</script>"
             write_pages(self.plan, build_sessions(self.plan), public, root)
             self.assertIn("&lt;script&gt;not executable&lt;/script&gt;", (public / "index.html").read_text())
@@ -138,12 +143,20 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertEqual(sum(v["minutes"] for v in subset), minutes)
 
     def test_evening_dates_runtime_links_and_stable_identity(self):
-        catalog = read_video_catalog(ROOT / "video_catalog.tsv")
+        catalog = read_all_videos()
         allocation = json.loads((ROOT / "video_plan.json").read_text())
         sessions = build_video_sessions(self.plan, allocation, catalog)
         self.assertEqual(len(sessions), 34)
-        self.assertEqual(sum(s["video_minutes"] for s in sessions), 2288)
-        self.assertEqual(sum(len(s["videos"]) for s in sessions), 199)
+        self.assertEqual(sum(s["video_minutes"] for s in sessions), 2408)
+        self.assertEqual(sum(len(s["videos"]) for s in sessions), 150)
+        assigned = [v for s in sessions for v in s["videos"]]
+        self.assertEqual(len({v.get('id', v['path']) for v in assigned}), 148)
+        self.assertEqual(len([v for v in assigned if v['course'] == 'Micro']), 118)
+        self.assertEqual(len({v['id'] for v in assigned if v['course'] == 'Blood Bank Guy'}), 17)
+        self.assertEqual(len({v['id'] for v in assigned if v['course'] == 'Morgan'}), 7)
+        self.assertEqual(len(allocation['optional_lessons']), 75)
+        self.assertEqual(sessions[30]['mode'], 'review')
+        self.assertFalse(sessions[30]['videos'])
         for index, session in enumerate(sessions):
             self.assertEqual(session["day"], date(2026, 9, 15) + timedelta(days=index))
             self.assertEqual(session["start"].strftime("%H:%M"), "21:00")
@@ -168,7 +181,7 @@ class StudyCalendarTests(unittest.TestCase):
         self.assertEqual([s["uid"] for s in sessions], [s["uid"] for s in build_video_sessions(self.plan, changed, catalog)])
 
     def test_invalid_video_assignments_fail(self):
-        catalog = read_video_catalog(ROOT / "video_catalog.tsv")
+        catalog = read_all_videos()
         allocation = json.loads((ROOT / "video_plan.json").read_text())
         mutations = [
             lambda a: a["sessions"][0].update(date="2026-10-19"),
@@ -177,12 +190,48 @@ class StudyCalendarTests(unittest.TestCase):
             lambda a: a["sessions"][0]["lessons"].pop(),
             lambda a: a.update(max_video_minutes=10),
             lambda a: a.update(start="23:30"),
+            lambda a: a["optional_lessons"].append('bbguy-bloodgroups'),
+            lambda a: a["optional_lessons"].append(a["optional_lessons"][0]),
+            lambda a: a["sessions"][0]["lessons"].append(a["optional_lessons"][0]),
+            lambda a: a["sessions"][0]["lessons"].append('bbguy-lastminute-part2'),
         ]
         for mutate in mutations:
             changed = deepcopy(allocation)
             mutate(changed)
             with self.assertRaises(ValueError):
                 build_video_sessions(self.plan, changed, catalog)
+
+    def test_full_lecture_inventory_and_exact_part_coverage(self):
+        catalog = read_lecture_catalog(ROOT / "lecture_catalog.json")
+        self.assertEqual(len(catalog), 26)
+        self.assertEqual(sum(v['end_seconds'] - v['start_seconds'] for v in catalog.values()), 80079)
+        for course, count, seconds in [('Blood Bank Guy', 17, 50469), ('Morgan', 7, 29610)]:
+            subset = [v for v in catalog.values() if v['course'] == course]
+            self.assertEqual(len({v['id'] for v in subset}), count)
+            self.assertEqual(sum(v['end_seconds'] - v['start_seconds'] for v in subset), seconds)
+        parts = [v for v in catalog.values() if v['id'] == 'bbguy-lastminute']
+        self.assertEqual([(v['start_seconds'], v['end_seconds']) for v in parts], [(0, 3600), (3600, 7200), (7200, 10740)])
+        self.assertEqual([v['minutes'] for v in parts], [60, 60, 59])
+        self.assertTrue(parts[2]['url'].endswith('&t=7200s'))
+
+    def test_invalid_lecture_metadata_fails(self):
+        original = json.loads((ROOT / 'lecture_catalog.json').read_text())
+        mutations = [
+            lambda a: a['videos'].append(a['videos'][0]),
+            lambda a: a['videos'][0].update(youtube_id='https://evil.example/'),
+            lambda a: a['videos'][0].update(source_url='javascript:alert(1)'),
+            lambda a: a['videos'][16].update(part_ends=[3600, 7200]),
+            lambda a: a['videos'][16].update(part_ends=[7200, 3600, 10740]),
+            lambda a: a['videos'][16].update(part_ends=[10740]),
+        ]
+        for mutate in mutations:
+            value = deepcopy(original)
+            mutate(value)
+            with tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / 'lectures.json'
+                path.write_text(json.dumps(value))
+                with self.assertRaises(ValueError):
+                    read_lecture_catalog(path)
 
     def test_two_bank_totals_and_phase_deadlines(self):
         rows = read_question_plan(ROOT / "question_plan.csv", self.plan)

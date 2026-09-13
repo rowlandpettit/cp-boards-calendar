@@ -27,6 +27,8 @@
     .question-links { margin: 0 0 20px 142px; font-size: 14px; }
     .workload { border-bottom: 1px solid #ddd; padding-bottom: 16px; }
     .workload p { font-size: 15px; }
+    .video-group summary { display: block; }
+    .video-group li { margin-bottom: 12px; overflow-wrap: anywhere; }
     details:target { border-left: 3px solid #246da7; padding-left: 12px; }
     a:focus-visible, summary:focus-visible { outline: 2px solid #246da7; outline-offset: 4px; }
     @media (max-width: 600px) {
@@ -51,6 +53,7 @@
       <a href="@@WEBCAL@@">Subscribe to calendar</a>
       <a href="@@BASE@@/cp-study.ics">Calendar file</a>
       <a href="@@BASE@@/context.html">Study context</a>
+      <a href="#video-library">Video library</a>
       <a href="@@REPO@@/blob/main/plan.toml">Edit plan</a>
       <a href="@@BASE@@/rss.xml">RSS</a>
     </nav>
@@ -62,6 +65,13 @@
   </section>
   <h2>Daily Plan</h2>
   @@EVENTS@@
+  <section aria-labelledby="video-library">
+    <h2 id="video-library">Video Library</h2>
+    <p>@@VIDEO_SUMMARY@@</p>
+    <p>Blood Bank Guy: all 17 videos in the <a href="https://www.bbguy.org/education/videos/">official teaching library</a>, checked September 13, 2026. The separate podcast archive is not included. Most teaching videos are from 2011-2014; the board review is from 2024. Check current guidance and the linked corrections.</p>
+    <p>Morgan: all seven <a href="https://www.youtube.com/playlist?list=PL4GDLmrdXtfR-FnQIHq79-pQ01MdrFLd9">pathCast microbiology recordings</a> from 2020-2021. The linked 2026 companions are slides, not new videos. Also available: <a href="https://www.microbeswithmorgan.com/2026/03/mycology-part-3-2026.html">2026 Mycology Part 3 slides</a>.</p>
+    @@VIDEO_LIBRARY@@
+  </section>
 </main>
 <script>
   const examParts = '@@EXAM@@'.split('-').map(Number);

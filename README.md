@@ -9,7 +9,7 @@ Daily protected study blocks for the CP-only examination on October 19, 2026.
 - [HTTPS calendar feed](https://rowlandpettit.com/cp-boards-calendar/cp-study.ics)
 - [RSS feed](https://rowlandpettit.com/cp-boards-calendar/rss.xml), for RSS readers rather than Calendar
 
-The 35 morning blocks run September 14-October 18, 5:00-7:00 AM as floating local times. Another 34 separate Sketchy blocks run September 15-October 18, 9:00-10:30 PM, in the same subscription. The final two evenings are optional light recall. Each occurrence has a stable date-based ID and countdown to October 19; no event is generated on examination day.
+The 35 morning blocks run September 14-October 18, 5:00-7:00 AM as floating local times. Another 34 separate video blocks run September 15-October 18, 9:00-10:30 PM, in the same subscription. October 15 is catch-up; the final two evenings are optional light recall. Each occurrence has a stable date-based ID and countdown to October 19; no event is generated on examination day.
 
 Event notes include the objective, a realistic two-hour routine, selected materials, resource links and the adaptation policy. The main aim is learning from questions and recurring gaps, not completing every bank and deck. [Study strategy](context.md).
 
@@ -28,7 +28,18 @@ Edit `plan.toml` and the dated quotas in `question_plan.csv`, then run `make val
 
 `question_plan.csv` freezes dated counts; builds cannot reshuffle them. The published copy is `question-plan.csv`. Validation checks bank totals, phase deadlines, minimum redo age, buffers and timed practice without double-counting. Keep actual scores, question identifiers and completion logs private. The ASCP 125-question simulation overlaps bank content and is optional repeated practice, not another unique bank.
 
-`video_catalog.tsv` contains the 199 selected lesson titles, rounded durations and directly observed URL paths, with no private progress or paid content. `video_plan.json` freezes the dated lesson assignments so normal builds cannot reshuffle completed nights. Edit upcoming assignments explicitly and keep every selected lesson assigned exactly once. `scripts/allocate_videos.py` is only an initial-allocation utility and refuses to overwrite an existing file. Each evening event includes its individual video URLs, and the corresponding web section provides clickable lesson links.
+## Complete Video Plan
+
+- All **17 Blood Bank Guy teaching-library videos**, including the 2024 Last Minute Essentials: 14 hours 1 minute 9 seconds of source runtime. This means every video on the official teaching index checked September 13, not the separate podcast archive.
+- All **seven Dr. Margie Morgan pathCast microbiology lectures**: 8 hours 13 minutes 30 seconds. These are 2020-2021 recordings; 2026 companion slide links are included separately.
+- All **118 Sketchy Micro lessons**, plus **three Path chemistry lessons** and **three Pharm drug-monitoring lessons**.
+- **148 distinct videos / 150 assignments**, with approximately **40 hours 8 minutes** of rounded normal-speed video budgets. Every night is at most 80 video minutes within 90 reserved minutes. No faster playback is assumed.
+- The 179-minute Last Minute Essentials has three timestamped assignments: October 13, 00:00-01:00; October 14, 01:00-02:00; October 16, 02:00-02:59. Links start at the assigned timestamp but do not stop automatically.
+- October 15 is an explicit catch-up evening, aligned with morning timed practice. October 17-18 stays light. The other **75 previously selected Path/Pharm videos** remain individually linked as optional references; they are not extra nightly quotas.
+
+`video_catalog.tsv` preserves the original 199 Sketchy title/duration/path records without private progress or paid content. `lecture_catalog.json` adds the 24 public lecture records, observed YouTube durations and creator source links. Its validated part boundaries cover the complete long lecture without gaps. `video_plan.json` freezes dated assignments and explicitly lists optional Sketchy lessons. Normal builds cannot reshuffle nights; every required lesson/lecture part must appear exactly once. `scripts/allocate_videos.py` is an initial-allocation utility, refuses overwrite, and provides a reproducible `complete-bbguy` profile for this September 13 revision. Do not rerun it over later actual progress.
+
+Each evening contains individual video URLs and any exact timestamp range. The [complete video library](https://rowlandpettit.com/cp-boards-calendar/#video-library) links all lectures, their assigned dates, source handouts/corrections, Morgan companion slides and optional Sketchy references. Most Blood Bank Guy archive videos are from 2011-2014; consult current guidance when details have changed.
 
 - The question phase sets the default topic: mixed, first-miss review, repeat gaps or light. The earlier `weekly` topic rotation is retained as reference only; it no longer restricts daily question sampling.
 - Use a dated `overrides` entry to change one day's `topic`, `note`, `start`, `duration_minutes` or `mode` (`practice`, `timed`, `light`). Edit counts in `question_plan.csv`, not a separate `question_target` override.
