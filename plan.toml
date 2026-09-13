@@ -8,29 +8,56 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 3
-updated_at = 2026-09-13T17:55:48Z
+sequence = 4
+updated_at = 2026-09-13T19:40:16Z
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
 scope = "CP-only ABPath certification, not AP boards or Step/USMLE. Questions with explanation review, delayed redos and practical laboratory interpretation drive the plan. Sketchy Path/Pharm are selective foundation support; do not let broad clinical treatment videos displace transfusion, methods/QC, chemistry, heme, diagnostic microbiology or management. Reading every page and activating every card are not required."
-default_question_target = 25
-review_rule = "Review every wrong answer and uncertain correct answer. Redo misses closed-book about two days later; repeat unresolved concepts about a week later. Track first-pass and repeated-question results separately. A complete first pass is not the end of the work."
+review_rule = "Review explanations immediately for wrong and uncertain correct answers. From September 16, reserve 10 first redos daily from questions at least two days old, prioritizing recurring gaps; this does not promise every miss a two-day redo. Finish the remaining first-miss queue October 5-12. October 13-16 reserves up to 80 repeat/gap questions daily. Track unique new questions, first redos and repeat misses separately; never count a simulation as a new bank."
 anki_rule = "Throughout the day: due selected CP cards first, prioritizing transfusion, heme/coag and chemistry; then selected Sketchy Micro cards matching the evening lessons. Add at most 10-20 useful facts daily only if reviews stay manageable. Do not activate entire overlapping decks. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
 flexibility = "Targets are provisional. Log actual work privately, review the plan weekly, and change upcoming topics based on fresh performance. Do not stack missed days or treat resource completion as a pass guarantee."
-capacity = "Morning default: 5-6 AM targeted reading, 6-7 AM questions and explanations. Timed practice and final-light dates are exceptions. A full PathDojo pass plus incorrect-question redos needs more question/review time than that single hour is likely to provide. Extra daytime time versus shortening reading remains to be decided; no extra daytime block is assumed."
+capacity = "The 5-7 AM block is the protected anchor, not the whole day's workload. First-pass targets typically require about 3-4.5 hours of questions, explanations and brief reading daily under planning assumptions of 3-4 minutes per new question and 2-3 per redo. About 1-2.5 additional daytime hours remain unscheduled. Measure actual pace after three days. If only two hours are available, the complete-two-bank target must be replanned; reduce optional videos before explanation review or sleep."
+question_plan = "Two required question banks only: 885 remaining PathDojo questions plus 211 ASCP 2025 questions (157 CP practice and 54 shared hematopathology). Total 1,096 unique first-pass questions by October 4. The hypothetical 60% miss allowance reserves 531 PathDojo and 127 ASCP first redos, 658 total, by October 12. These are estimates, not actual scores. October 13-16 provides 320 additional repeat/gap slots, including a 55-question timed block; October 17-18 stays light."
+bank_selection = "Use mixed CP and relevant shared categories each day. PathDojo: Tutorial Mode, New (Unanswered) Questions, all CP plus shared categories in the CP subscription. ASCP: CP Practice Questions for all six CP domains; AP/CP Practice Questions only for AP- Bone Marrow Biopsy and AP- Lymph Node and Spleen. Select Random, not Easiest. Never Select All in the combined AP/CP course. ASCP's CP-only screen excludes these two relevant hematopathology groups."
+deduplication = "Bank links open setup pages, not pre-created or date-filtered exams. Create a set only when ready to do it. Record its date, identifier and completed unique questions privately. ASCP's first-use setup did not show an unanswered filter; verify available history/filtering as you work and use the seen-question ledger to avoid counting repeats as new. The 125-question ASCP CP simulation reuses bank content and is optional instead of other repeat practice, not an additional 125 unique questions."
+review_capacity = "The 658 first-redo allowance covers 60% of the planned first pass, rounded up per bank. A further 60% miss rate on those redos would require 395 repeat attempts, exceeding the 320-slot final buffer by 75, before uncertainty review. Review actual queue size every Sunday and move repeat work earlier or add daytime capacity if needed. No finite count guarantees readiness. PATHPrimer and Arinsburg/Jhang are targeted references, not third required full banks."
 videos = "Separate Sketchy block 9-10:30 PM starting Tuesday September 15. Rewatch all 118 Micro videos plus 43 selected Path and 38 Pharm: 199 videos, approximately 38 hours 8 minutes at normal speed. Individual lesson links are in each evening event. Finish assigned videos by October 16; October 17-18 are optional light recall, not new material."
 rest = "The evening-to-morning gap is only 6.5 hours before wind-down. Stop early where possible; trim optional videos rather than extending the night."
 gym = "The 5-7 AM study block intentionally overlaps the separate fitness routine, which stays unchanged. Use familiar audio or recall at the gym when practical; use seated study time for detailed questions, calculations and images. Count actual study completed, not two separate hours for overlapping events."
 
 [resources]
-dojo = "https://pathdojo.com/"
+dojo = "https://pathdojo.com/exams/create/?exam_type=tutorial"
 ascp = "https://www.ascp.org/apps/services/education"
+ascp_cp = "https://education.ascp.org/Users/UserOnlineCourse.aspx?LearningActivityID=MCsuczMSxJ1btVenC7fVuA%3d%3d&ParentBundleID=txmjj8t09FWb63G9lI0VUQ%3d%3d"
+ascp_heme = "https://education.ascp.org/Users/UserOnlineCourse.aspx?LearningActivityID=H25Mc9SCDCdCV3r2cdVuIw%3d%3d&ParentBundleID=txmjj8t09FWb63G9lI0VUQ%3d%3d"
 primer = "https://app.pathprimer.com/"
 abpath = "https://abpath.org/exam-preparation/"
 blueprint = "https://abpath.org/wp-content/uploads/2026/01/CP_2026.pdf"
 bbguy = "https://www.bbguy.org/education/videos/"
 morgan = "https://www.microbeswithmorgan.com/"
+
+[question_workload]
+first_pass_end = 2026-10-04
+first_redo_end = 2026-10-12
+light_start = 2026-10-17
+dojo_new = 885
+ascp_cp_new = 157
+ascp_heme_new = 54
+miss_percent = 60
+repeat_capacity = 320
+
+[topics.mixed]
+title = "Mixed CP + shared"
+goal = "Complete today's unique mixed questions across both required banks, review explanations, and clear the dated first-redo allowance. Topic labels below are reading priorities, not restrictions on the mixed question pool."
+materials = "PathDojo and ASCP 2025 CP plus shared hematopathology. Personal guide only for gaps; selected CP Anki through the day."
+links = ["dojo", "ascp_cp", "ascp_heme", "blueprint"]
+
+[topics.redo]
+title = "First-miss review"
+goal = "No required new questions. Redo the remaining first-pass misses closed-book without selecting the same already-cleared questions repeatedly. Review the explanation, then log first-redo completion and repeat misses separately."
+materials = "Private first-miss ledger and the original PathDojo/ASCP question histories; targeted guide sections."
+links = ["dojo", "ascp_cp", "ascp_heme"]
 
 [topics.baseline]
 title = "Mixed baseline"
@@ -41,7 +68,7 @@ links = ["dojo", "blueprint"]
 [topics.transfusion]
 title = "Transfusion"
 goal = "Practice compatibility and antibody panels, components, reactions, donors, HLA and cellular therapy. Work through interpretations before revealing answers."
-materials = "PathDojo; selected ASCP CP or Arinsburg/Jhang transfusion questions; Blood Bank Guy only for specific gaps."
+materials = "PathDojo and ASCP; Blood Bank Guy or the personal guide only for specific gaps."
 links = ["dojo", "bbguy", "ascp"]
 
 [topics.heme]
@@ -53,7 +80,7 @@ links = ["dojo", "ascp"]
 [topics.chemistry]
 title = "Chemistry"
 goal = "Practice analytical methods, QC, acid-base and electrolyte interpretation, endocrine testing, toxicology, immunology and body fluids. Work calculations rather than recognizing formulas."
-materials = "PathDojo; selected Arinsburg/Jhang or ASCP chemistry questions; targeted current reference reading."
+materials = "PathDojo and ASCP chemistry questions; targeted current reference reading."
 links = ["dojo", "ascp", "primer"]
 
 [topics.micro]
@@ -65,19 +92,19 @@ links = ["dojo", "morgan"]
 [topics.management]
 title = "Mixed + weekly reset"
 goal = "Include management, informatics, molecular methods and calculations. Review the week's recurring gaps and choose next week's priorities without dropping any core domain."
-materials = "Mixed PathDojo; selected management/molecular questions from ASCP or Arinsburg/Jhang; official blueprint."
+materials = "Mixed PathDojo with management, informatics and molecular categories included; official blueprint. ASCP's selected CP pool does not have a separate management group."
 links = ["dojo", "blueprint"]
 
 [topics.consolidate]
 title = "Consolidate gaps"
-goal = "Revisit recurring errors and use unfamiliar second-source questions to check transfer. Prioritize explanations, practical figures and a short final-review list."
-materials = "Selected ASCP CP or Arinsburg/Jhang; flagged concepts; manageable CP Anki reviews."
+goal = "Revisit repeat misses and explain the underlying concepts without relying on remembered answer choices. Prioritize practical figures, calculations and a short final-review list. No third full bank."
+materials = "Repeat misses from PathDojo and ASCP; flagged practical figures and calculations; manageable CP Anki reviews. No third full bank."
 links = ["ascp", "abpath"]
 
 [topics.timed]
 title = "Timed mixed practice"
 goal = "Practice one 55-question mixed block in 66 minutes without references. Use the remaining time for priority misses; carry unresolved explanations into the next review session."
-materials = "Fresh CP and shared-topic questions where available. Label repeated-question scores as repeats."
+materials = "Mixed CP and shared-topic repeat practice from PathDojo. Label the score as repeated-question pacing practice, not a fresh readiness measure."
 links = ["dojo", "ascp", "abpath"]
 
 [topics.light]
@@ -97,24 +124,40 @@ SU = "management"
 
 # Date keys identify the calendar occurrence. Keep them stable when changing topics/times.
 [overrides."2026-09-14"]
-topic = "baseline"
+topic = "mixed"
+note = "First day: 43 PathDojo plus 8 ASCP CP and 3 ASCP shared heme, 54 new total. No first redos due yet. Record real review minutes; do not use an old score as a baseline."
 
 [overrides."2026-09-19"]
-topic = "micro"
-note = "Give microbiology extra attention this week; retain mixed heme questions."
+topic = "mixed"
+note = "Keep the new sets mixed; use the brief reading segment for any microbiology gap."
+
+[overrides."2026-09-16"]
+note = "Three-day calibration: compare actual minutes and unique questions completed with the 3-4.5-hour daily estimate. Confirm daytime capacity. Revise future quotas now if explanation review is backing up; do not borrow from sleep."
+
+[overrides."2026-09-20"]
+note = "Weekly reset: log unique questions remaining in each bank, first misses not retried, repeat misses, uncertain answers and explanation backlog. Check transfusion, management and practical-image coverage against the blueprint. Move work earlier if the final review queue is growing beyond capacity."
+
+[overrides."2026-09-27"]
+note = "Weekly reset: recompute remaining unique questions per day through October 4 and actual first-miss review needs through October 12. Include uncertain answers. Prioritize weak blueprint domains in brief reading; new sets stay mixed."
+
+[overrides."2026-10-04"]
+note = "First-pass deadline and weekly reset: confirm unique completion, not simply total attempts. Recalculate real first misses and repeat misses. If either bank is unfinished, explicitly revise October 5-12 rather than silently counting repeats as new."
+
+[overrides."2026-10-11"]
+note = "Weekly reset: confirm the actual remaining first-miss queue fits tomorrow, and compare repeat misses plus practical gaps against the final 320-slot reserve. Keep October 17-18 light; reduce optional material first."
 
 [overrides."2026-09-26"]
-topic = "chemistry"
+topic = "mixed"
 
 [overrides."2026-10-03"]
-topic = "micro"
+topic = "mixed"
 
 [overrides."2026-10-10"]
-topic = "chemistry"
+topic = "redo"
 
 [overrides."2026-10-12"]
-topic = "timed"
-mode = "timed"
+topic = "redo"
+note = "First-redo deadline: confirm both actual first-miss queues are clear. Do not substitute a random simulation for unfinished missed-question review."
 
 [overrides."2026-10-13"]
 topic = "consolidate"

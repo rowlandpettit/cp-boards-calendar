@@ -1,6 +1,7 @@
 # Maintaining This Calendar
 
 - Read `README.md`, `context.md` and `plan.toml` before changing the schedule.
+- `question_plan.csv` is the frozen dated workload. PathDojo and ASCP CP/shared heme are the two required banks. Update future counts explicitly, validate totals/deadlines, and do not count repeated simulations or overlapping ASCP views as additional unique questions. Keep actual progress private.
 - Scope is CP-only ABPath certification, not AP boards or Step/USMLE. Prioritize CP questions and explanation review, delayed redos, practical laboratory interpretation and selected recall. Sketchy Path/Pharm are optional foundation support, not the governing syllabus. Do not expand full courses or require reading every page simply because the resources are available.
 - This repository is only the publishable CP study calendar. Never add paid materials, actual scores, licensing, payments, identifiers or unrelated personal data.
 - The original materials and detailed audits live outside this repo. Local continuity information may be in ignored `private-context.md`.

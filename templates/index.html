@@ -15,7 +15,7 @@
     p { max-width: 780px; }
     .count { color: #a43c3c; font-weight: 700; font-size: 24px; margin: 0; }
     nav { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 20px; }
-    a { color: #12624f; text-underline-offset: 3px; overflow-wrap: anywhere; }
+    a { color: #246da7; text-underline-offset: 3px; overflow-wrap: anywhere; }
     .meta { color: #555; margin: 8px 0; }
     details { border-bottom: 1px solid #ddd; }
     summary { padding: 16px 0; cursor: pointer; display: grid; grid-template-columns: 130px 1fr 100px; gap: 12px; align-items: baseline; }
@@ -24,8 +24,11 @@
     .notes { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; margin: 0 0 24px 142px; }
     .lesson-links { margin: 0 0 20px 142px; padding-left: 20px; }
     .lesson-links li { margin-bottom: 8px; }
-    details:target { border-left: 3px solid #12624f; padding-left: 12px; }
-    a:focus-visible, summary:focus-visible { outline: 2px solid #12624f; outline-offset: 4px; }
+    .question-links { margin: 0 0 20px 142px; font-size: 14px; }
+    .workload { border-bottom: 1px solid #ddd; padding-bottom: 16px; }
+    .workload p { font-size: 15px; }
+    details:target { border-left: 3px solid #246da7; padding-left: 12px; }
+    a:focus-visible, summary:focus-visible { outline: 2px solid #246da7; outline-offset: 4px; }
     @media (max-width: 600px) {
       main { padding: 24px 16px; }
       summary { grid-template-columns: 1fr auto; gap: 6px 10px; }
@@ -33,6 +36,7 @@
       summary small { grid-column: 2; grid-row: 1; }
       .notes { margin-left: 0; }
       .lesson-links { margin-left: 0; }
+      .question-links { margin-left: 0; }
     }
   </style>
 </head>
@@ -51,6 +55,11 @@
       <a href="@@BASE@@/rss.xml">RSS</a>
     </nav>
   </header>
+  <section class="workload" aria-labelledby="question-heading">
+    <h2 id="question-heading">PathDojo + ASCP</h2>
+    @@QUESTION_SUMMARY@@
+    <p><a href="@@BASE@@/question-plan.csv">Daily question counts</a> | <a href="@@BASE@@/context.html">Review rules and bank setup</a></p>
+  </section>
   <h2>Daily Plan</h2>
   @@EVENTS@@
 </main>

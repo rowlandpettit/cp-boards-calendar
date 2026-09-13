@@ -1,4 +1,5 @@
 from copy import deepcopy
+import csv
 from datetime import date, timedelta
 import json
 from pathlib import Path
@@ -13,6 +14,7 @@ from icalendar import Calendar
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, write_pages
+from question_workload import read_question_plan, estimated_misses
 
 
 class StudyCalendarTests(unittest.TestCase):
@@ -41,7 +43,7 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertTrue(str(event["ATTACH"]).endswith("/context.html"))
             self.assertIn("MATERIALS", str(event["DESCRIPTION"]))
             self.assertIn("FLEXIBLE PLAN", str(event["DESCRIPTION"]))
-        self.assertIn("Mixed baseline", str(events[0]["SUMMARY"]))
+        self.assertIn("54 new + 0 redos", str(events[0]["SUMMARY"]))
         self.assertIn("1 day left", str(events[-1]["SUMMARY"]))
 
     def test_topic_time_and_revision_edits_keep_uids(self):
@@ -102,6 +104,7 @@ class StudyCalendarTests(unittest.TestCase):
             shutil.copy(ROOT / "plan.toml", root)
             shutil.copy(ROOT / "video_plan.json", root)
             shutil.copy(ROOT / "video_catalog.tsv", root)
+            shutil.copy(ROOT / "question_plan.csv", root)
             shutil.copytree(ROOT / "templates", root / "templates")
             generate(root)
             public = root / "public"
@@ -111,6 +114,9 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertIn("05:00-07:00", text)
             self.assertIn('id="study-2026-09-15"', text)
             self.assertIn('id="video-2026-09-15"', text)
+            self.assertIn('ASCP shared heme setup</a>', text)
+            self.assertIn('href="https://pathdojo.com/exams/create/?exam_type=tutorial"', text)
+            self.assertEqual((public / "question-plan.csv").read_bytes(), (root / "question_plan.csv").read_bytes())
             self.assertIn('href="https://app.sketchy.com/study/medical/chapter/gram-positive-cocci/lesson/staphylococcus-aureus"', text)
             self.plan["overrides"]["2026-09-14"]["goal"] = "<script>not executable</script>"
             write_pages(self.plan, build_sessions(self.plan), public, root)
@@ -177,6 +183,77 @@ class StudyCalendarTests(unittest.TestCase):
             mutate(changed)
             with self.assertRaises(ValueError):
                 build_video_sessions(self.plan, changed, catalog)
+
+    def test_two_bank_totals_and_phase_deadlines(self):
+        rows = read_question_plan(ROOT / "question_plan.csv", self.plan)
+        expected = {"dojo_new": 885, "ascp_cp_new": 157, "ascp_heme_new": 54,
+                    "dojo_first_redo": 531, "ascp_first_redo": 127,
+                    "repeat_capacity": 320, "timed_questions": 55}
+        for key, total in expected.items():
+            self.assertEqual(sum(r[key] for r in rows.values()), total)
+        self.assertEqual(sum(r["new"] for r in rows.values()), 1096)
+        self.assertEqual(sum(r["first_redo"] for r in rows.values()), 658)
+        self.assertEqual(estimated_misses(658, 60), 395)
+        self.assertEqual(395 - expected["repeat_capacity"], 75)
+        self.assertEqual(rows[date(2026, 9, 14)]["new"], 54)
+        self.assertEqual(rows[date(2026, 9, 15)]["new"], 53)
+        self.assertEqual(rows[date(2026, 9, 16)]["first_redo"], 10)
+        self.assertEqual(rows[date(2026, 10, 4)]["new"], 52)
+        early = [r for d, r in rows.items() if d <= date(2026, 10, 4)]
+        self.assertEqual(sum(r["first_redo"] for r in early), 190)
+        for day, row in rows.items():
+            if day > date(2026, 10, 4):
+                self.assertEqual(row["new"], 0)
+            if day > date(2026, 10, 12):
+                self.assertEqual(row["first_redo"], 0)
+            if day >= date(2026, 10, 17):
+                self.assertEqual(row["repeat_capacity"], 0)
+
+    def test_daily_quotas_in_feed_and_matching_site(self):
+        sessions = build_sessions(self.plan)
+        first = sessions[0]
+        for text in ("PathDojo: 43 NEW", "ASCP: 8 NEW", "3 NEW shared", "54 new + 0 first redos",
+                     "05:25-06:40", "06:40-06:55", "additional daytime study"):
+            self.assertIn(text, first["description"])
+        self.assertEqual(first["assignment"]["new"], 54)
+        self.assertIn("hypothetical 60%", sessions[2]["description"])
+        self.assertEqual(sessions[31]["assignment"]["timed_questions"], 55)
+        self.assertEqual(sessions[31]["assignment"]["repeat_capacity"], 80)
+        self.assertIn("55 timed + 25 review slots", sessions[31]["title"])
+        self.assertIn("0 required new", sessions[-1]["description"])
+        self.assertNotIn("Targeted reading for today's topic", first["description"])
+
+    def test_invalid_question_plans_fail(self):
+        with (ROOT / "question_plan.csv").open(newline="") as stream:
+            reader = csv.DictReader(stream)
+            fields, rows = reader.fieldnames, list(reader)
+        mutations = [
+            lambda r: r[0].update(dojo_new="44"),
+            lambda r: r[0].update(date="2026-09-15"),
+            lambda r: r.pop(),
+            lambda r: r[0].update(ascp_cp_new="-1"),
+            lambda r: r[21].update(phase="first_pass"),
+            lambda r: r[31].update(timed_questions="125"),
+            lambda r: (r[0].update(dojo_first_redo="8"), r[2].update(dojo_first_redo="0")),
+            lambda r: (r[20].update(dojo_new="0"), r[21].update(dojo_new="42")),
+            lambda r: (r[29].update(repeat_capacity="0"), r[34].update(repeat_capacity="80")),
+        ]
+        for mutate in mutations:
+            changed = deepcopy(rows)
+            mutate(changed)
+            with tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "questions.csv"
+                with path.open("w", newline="") as stream:
+                    writer = csv.DictWriter(stream, fieldnames=fields)
+                    writer.writeheader()
+                    writer.writerows(changed)
+                with self.assertRaises(ValueError):
+                    read_question_plan(path, self.plan)
+
+    def test_conflicting_legacy_target_fails(self):
+        self.plan["overrides"]["2026-09-14"]["question_target"] = 25
+        with self.assertRaises(ValueError):
+            build_sessions(self.plan)
 
 
 if __name__ == "__main__":

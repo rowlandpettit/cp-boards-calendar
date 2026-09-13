@@ -15,12 +15,23 @@ Event notes include the objective, a realistic two-hour routine, selected materi
 
 ## Edit and Sync
 
-Edit `plan.toml`, then run `make validate`, commit and push to `main`. GitHub Actions regenerates the public feeds and deploys GitHub Pages. Calendar subscribers receive updates on their configured refresh schedule; updates are not instantaneous.
+Edit `plan.toml` and the dated quotas in `question_plan.csv`, then run `make validate`, commit and push to `main`. GitHub Actions regenerates the public feeds and deploys GitHub Pages. Calendar subscribers receive updates on their configured refresh schedule; updates are not instantaneous.
+
+## Two-Bank Workload
+
+- Required first pass: 885 PathDojo + 157 ASCP CP + 54 ASCP shared hematopathology = **1,096 unique questions**, September 14-October 4.
+- September 14: 54 new. September 15-16: 53 new daily. September 17-October 4: 52 new daily. Each date lists the exact bank split.
+- September 16-October 4: 8 PathDojo + 2 ASCP first redos daily, 190 total. These are estimated slots, not actual results.
+- October 5-12: clear the other 468 estimated first redos, 58-60 daily. Under the hypothetical 60% incorrect assumption, first-redo capacity totals **658** (531 PathDojo, 127 ASCP).
+- October 13-16: **320 additional repeat/gap slots**, up to 80 daily. October 15 includes a 55-question timed block within its 80 slots, not in addition. October 17-18 remains light.
+- The morning now prioritizes questions and explanations, with 15 minutes of targeted reading. Daily quotas are whole-day targets: expect roughly 3-4.5 hours of question/review work on first-pass days, including the protected two hours. Additional daytime time is needed but has not been assigned a clock time.
+
+`question_plan.csv` freezes dated counts; builds cannot reshuffle them. The published copy is `question-plan.csv`. Validation checks bank totals, phase deadlines, minimum redo age, buffers and timed practice without double-counting. Keep actual scores, question identifiers and completion logs private. The ASCP 125-question simulation overlaps bank content and is optional repeated practice, not another unique bank.
 
 `video_catalog.tsv` contains the 199 selected lesson titles, rounded durations and directly observed URL paths, with no private progress or paid content. `video_plan.json` freezes the dated lesson assignments so normal builds cannot reshuffle completed nights. Edit upcoming assignments explicitly and keep every selected lesson assigned exactly once. `scripts/allocate_videos.py` is only an initial-allocation utility and refuses to overwrite an existing file. Each evening event includes its individual video URLs, and the corresponding web section provides clickable lesson links.
 
-- Change `weekly` for the default topic rotation.
-- Use a dated `overrides` entry to change one day's `topic`, `note`, `start`, `duration_minutes`, `question_target` or `mode` (`practice`, `timed`, `light`).
+- The question phase sets the default topic: mixed, first-miss review, repeat gaps or light. The earlier `weekly` topic rotation is retained as reference only; it no longer restricts daily question sampling.
+- Use a dated `overrides` entry to change one day's `topic`, `note`, `start`, `duration_minutes` or `mode` (`practice`, `timed`, `light`). Edit counts in `question_plan.csv`, not a separate `question_target` override.
 - Set `status = "CANCELLED"` on an override to cancel a day while preserving its identity.
 - Optional override `goal` or `materials` replaces that day's description section.
 - Increment `settings.sequence` and update `settings.updated_at` in UTC for every published plan revision. Keep the namespace and occurrence dates stable.
