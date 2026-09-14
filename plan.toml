@@ -1,6 +1,7 @@
 [settings]
 title = "CP Boards"
 start_date = 2026-09-14
+morning_start_date = 2026-09-18
 exam_date = 2026-10-19
 start = "05:00"
 duration_minutes = 120
@@ -8,21 +9,21 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 5
-updated_at = 2026-09-13T20:13:33Z
+sequence = 6
+updated_at = 2026-09-14T22:36:53Z
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."
 scope = "CP-only ABPath certification, not AP boards or Step/USMLE. Questions with explanation review, delayed redos and practical laboratory interpretation drive the plan. Sketchy Path/Pharm are selective foundation support; do not let broad clinical treatment videos displace transfusion, methods/QC, chemistry, heme, diagnostic microbiology or management. Reading every page and activating every card are not required."
-review_rule = "Review explanations immediately for wrong and uncertain correct answers. From September 16, reserve 10 first redos daily from questions at least two days old, prioritizing recurring gaps; this does not promise every miss a two-day redo. Finish the remaining first-miss queue October 5-12. October 13-16 reserves up to 80 repeat/gap questions daily. Track unique new questions, first redos and repeat misses separately; never count a simulation as a new bank."
+review_rule = "Morning study starts Friday September 18. Review explanations immediately for wrong and uncertain correct answers. From Sunday September 20, reserve 10 first redos daily from questions at least two days old, prioritizing recurring gaps; this does not promise every miss a two-day redo. These 150 early redos leave 508 estimated first redos for October 5-12, 63-64 daily. October 13-16 reserves up to 80 repeat/gap questions daily. Track unique new questions, first redos and repeat misses separately; never count a simulation as a new bank."
 anki_rule = "Throughout the day: due selected CP cards first, prioritizing transfusion, heme/coag and chemistry; then selected Sketchy Micro cards matching the evening lessons. Add at most 10-20 useful facts daily only if reviews stay manageable. Do not activate entire overlapping decks. Arinsburg/Jhang cards count as MCQs, not quick Anki reviews."
 flexibility = "Targets are provisional. Log actual work privately, review the plan weekly, and change upcoming topics based on fresh performance. Do not stack missed days or treat resource completion as a pass guarantee."
-capacity = "The 5-7 AM block is the protected anchor, not the whole day's workload. First-pass targets typically require about 3-4.5 hours of questions, explanations and brief reading daily under planning assumptions of 3-4 minutes per new question and 2-3 per redo. About 1-2.5 additional daytime hours remain unscheduled. Measure actual pace after three days. If only two hours are available, the complete-two-bank target must be replanned; reduce optional videos before explanation review or sleep."
-question_plan = "Two required question banks only: 885 remaining PathDojo questions plus 211 ASCP 2025 questions (157 CP practice and 54 shared hematopathology). Total 1,096 unique first-pass questions by October 4. The hypothetical 60% miss allowance reserves 531 PathDojo and 127 ASCP first redos, 658 total, by October 12. These are estimates, not actual scores. October 13-16 provides 320 additional repeat/gap slots, including a 55-question timed block; October 17-18 stays light."
+capacity = "The 5-7 AM block is the protected anchor, not the whole day's workload. Starting September 18 leaves 17 first-pass days: 65 new daily September 18-25, then 64 daily September 26-October 4. First-pass work typically needs about 4-5.25 hours for questions, explanations and brief reading at 3-4 minutes per new question and 2-3 per redo. About 2-3.25 additional daytime hours remain unscheduled. Friday is the kickoff; an extended morning was requested but its end time is not confirmed, so only the existing 5-7 AM reservation is published. Measure actual pace September 20. If only two hours are available, the full two-bank target must be replanned; do not substitute less explanation review or sleep."
+question_plan = "Two required question banks only: 885 remaining PathDojo questions plus 211 ASCP 2025 questions (157 CP practice and 54 shared hematopathology). Complete 1,096 unique first-pass questions September 18-October 4. Friday kickoff: 53 PathDojo + 9 ASCP CP + 3 shared heme = 65 new, with no first redos yet. The hypothetical 60% miss allowance reserves 531 PathDojo and 127 ASCP first redos, 658 total, by October 12. These are estimates, not actual scores. October 13-16 retains 320 repeat/gap slots including 55 timed questions on October 15; October 17-18 stays light. Earlier September 14-17 morning quotas are cancelled, not added on top of the revised counts."
 bank_selection = "Use mixed CP and relevant shared categories each day. PathDojo: Tutorial Mode, New (Unanswered) Questions, all CP plus shared categories in the CP subscription. ASCP: CP Practice Questions for all six CP domains; AP/CP Practice Questions only for AP- Bone Marrow Biopsy and AP- Lymph Node and Spleen. Select Random, not Easiest. Never Select All in the combined AP/CP course. ASCP's CP-only screen excludes these two relevant hematopathology groups."
 deduplication = "Bank links open setup pages, not pre-created or date-filtered exams. Create a set only when ready to do it. Record its date, identifier and completed unique questions privately. ASCP's first-use setup did not show an unanswered filter; verify available history/filtering as you work and use the seen-question ledger to avoid counting repeats as new. The 125-question ASCP CP simulation reuses bank content and is optional instead of other repeat practice, not an additional 125 unique questions."
 review_capacity = "The 658 first-redo allowance covers 60% of the planned first pass, rounded up per bank. A further 60% miss rate on those redos would require 395 repeat attempts, exceeding the 320-slot final buffer by 75, before uncertainty review. Review actual queue size every Sunday and move repeat work earlier or add daytime capacity if needed. No finite count guarantees readiness. PATHPrimer and Arinsburg/Jhang are targeted references, not third required full banks."
-videos = "Separate video block 9-10:30 PM starting Tuesday September 15: all 17 Blood Bank Guy teaching-library videos, all seven Morgan pathCast microbiology lectures, all 118 Sketchy Micro lessons, plus three chemistry Path and three drug-monitoring Pharm lessons. That is 148 distinct videos in 150 assignments, about 40 hours 8 minutes using rounded normal-speed budgets. Last Minute Essentials is split across October 13, 14 and 16 with exact timestamp links. October 15 is a catch-up evening; October 17-18 stay light. The other 75 previously selected Sketchy Path/Pharm videos remain linked as optional, not additional quotas. Every required video finishes by October 16."
+videos = "Separate video block 9-10:30 PM starting Wednesday September 16. Thursday September 17 is exactly five review videos, about 54 minutes, with no extra assigned videos. All 17 Blood Bank Guy teaching-library videos, all seven Morgan pathCast lectures, all 118 Sketchy Micro lessons, three chemistry Path and three monitoring Pharm lessons remain scheduled: 148 distinct videos, 150 assignments and about 40 hours 8 minutes of rounded normal-speed budgets. Last Minute Essentials remains on October 13, 14 and 16. October 15 is now a watch night, not a full catch-up evening; its morning question-review reserve is unchanged. Every watch night remains at most 80 video minutes. October 17-18 stay light. The other 75 selected Path/Pharm lessons remain optional."
 rest = "The evening-to-morning gap is only 6.5 hours before wind-down. Stop early where possible; trim optional videos rather than extending the night."
 gym = "The 5-7 AM study block intentionally overlaps the separate fitness routine, which stays unchanged. Use familiar audio or recall at the gym when practical; use seated study time for detailed questions, calculations and images. Count actual study completed, not two separate hours for overlapping events."
 
@@ -124,18 +125,31 @@ SU = "management"
 
 # Date keys identify the calendar occurrence. Keep them stable when changing topics/times.
 [overrides."2026-09-14"]
-topic = "mixed"
-note = "First day: 43 PathDojo plus 8 ASCP CP and 3 ASCP shared heme, 54 new total. No first redos due yet. Record real review minutes; do not use an old score as a baseline."
+status = "CANCELLED"
+note = "Morning launch moved to Friday September 18 at the user's request. Former quotas have been redistributed; no work is presumed completed."
+
+[overrides."2026-09-15"]
+status = "CANCELLED"
+note = "No morning assignment. Follow the Friday kickoff and revised dated quotas."
+
+[overrides."2026-09-17"]
+status = "CANCELLED"
+note = "No morning assignment. Tonight has five linked review videos; question work starts Friday."
+
+[overrides."2026-09-18"]
+label = "Kickoff"
+note = "Friday kickoff: 53 PathDojo + 9 ASCP CP + 3 shared heme = 65 new mixed questions; no first redos yet. Use the full available morning for explanations, targeted reading and a short private progress log. The end time of an extended kickoff is still to be confirmed; the calendar currently reserves 5-7 AM only. Do not treat that as enough time for the whole quota."
 
 [overrides."2026-09-19"]
 topic = "mixed"
 note = "Keep the new sets mixed; use the brief reading segment for any microbiology gap."
 
 [overrides."2026-09-16"]
-note = "Three-day calibration: compare actual minutes and unique questions completed with the 3-4.5-hour daily estimate. Confirm daytime capacity. Revise future quotas now if explanation review is backing up; do not borrow from sleep."
+status = "CANCELLED"
+note = "No morning assignment. The video kickoff is tonight; morning question work starts Friday September 18."
 
 [overrides."2026-09-20"]
-note = "Weekly reset: log unique questions remaining in each bank, first misses not retried, repeat misses, uncertain answers and explanation backlog. Check transfusion, management and practical-image coverage against the blueprint. Move work earlier if the final review queue is growing beyond capacity."
+note = "Three-day calibration and weekly reset: compare actual minutes since Friday with the 4-5.25-hour daily estimate. Confirm daytime capacity and replan now if explanations are backing up. Log unique questions remaining, first misses not retried, repeat misses and uncertain answers. Check transfusion, management and practical-image coverage. Do not borrow from sleep."
 
 [overrides."2026-09-27"]
 note = "Weekly reset: recompute remaining unique questions per day through October 4 and actual first-miss review needs through October 12. Include uncertain answers. Prioritize weak blueprint domains in brief reading; new sets stay mixed."

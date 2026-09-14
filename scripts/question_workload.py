@@ -14,9 +14,10 @@ def estimated_misses(count, percent):
 
 def read_question_plan(path, plan):
     settings, config = plan["settings"], plan["question_workload"]
+    first_day = settings.get("morning_start_date", settings["start_date"])
     if not 0 <= config["miss_percent"] <= 100:
         raise ValueError("Miss assumption must be a percentage")
-    if not (settings["start_date"] <= config["first_pass_end"] < config["first_redo_end"]
+    if not (settings["start_date"] <= first_day <= config["first_pass_end"] < config["first_redo_end"]
             < config["light_start"] < settings["exam_date"]):
         raise ValueError("Question phases must be ordered before examination day")
     rows = {}
@@ -31,7 +32,7 @@ def read_question_plan(path, plan):
             row = {key: int(raw[key]) for key in COUNTS}
             if any(value < 0 for value in row.values()):
                 raise ValueError("Question counts must be nonnegative")
-            phase = ("first_pass" if day <= config["first_pass_end"] else
+            phase = ("cancelled" if day < first_day else "first_pass" if day <= config["first_pass_end"] else
                      "first_redo" if day <= config["first_redo_end"] else
                      "repeat" if day < config["light_start"] else "light")
             if raw["phase"] != phase:
@@ -39,6 +40,8 @@ def read_question_plan(path, plan):
             row.update(day=day, phase=phase)
             row["new"] = row["dojo_new"] + row["ascp_cp_new"] + row["ascp_heme_new"]
             row["first_redo"] = row["dojo_first_redo"] + row["ascp_first_redo"]
+            if phase == "cancelled" and any(row[key] for key in COUNTS):
+                raise ValueError("Cancelled dates cannot retain question quotas")
             if phase != "first_pass" and row["new"]:
                 raise ValueError("New questions extend past the first-pass deadline")
             if phase in {"repeat", "light"} and row["first_redo"]:
@@ -71,6 +74,8 @@ def read_question_plan(path, plan):
 
 
 def assignment_label(row):
+    if row["phase"] == "cancelled":
+        return "Cancelled morning"
     if row["phase"] == "first_pass":
         return f"Mixed | {row['new']} new + {row['first_redo']} redos"
     if row["phase"] == "first_redo":
@@ -82,6 +87,8 @@ def assignment_label(row):
 
 
 def assignment_notes(row):
+    if row["phase"] == "cancelled":
+        return "DAILY QUESTION TARGET\n0 questions. This earlier morning was cancelled and its workload reallocated; it is not a catch-up debt."
     if row["phase"] == "light":
         return "DAILY QUESTION TARGET\n0 required new questions or catch-up quotas. Familiar recall only; stop after 20-40 minutes."
     lines = ["DAILY QUESTION TARGET (whole day, not a promise to fit 05:00-07:00)",

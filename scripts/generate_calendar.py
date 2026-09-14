@@ -84,17 +84,19 @@ def build_sessions(plan: dict, questions: dict | None = None) -> list[dict]:
     while day < settings["exam_date"]:
         override = plan.get("overrides", {}).get(day.isoformat(), {})
         assignment = questions[day]
-        default_topic = {"first_pass": "mixed", "first_redo": "redo", "repeat": "consolidate", "light": "light"}[assignment["phase"]]
+        default_topic = {"cancelled": "light", "first_pass": "mixed", "first_redo": "redo", "repeat": "consolidate", "light": "light"}[assignment["phase"]]
         topic_id = override.get("topic", default_topic)
         if topic_id not in plan["topics"]:
             raise ValueError(f"Unknown topic: {topic_id}")
         topic = plan["topics"][topic_id]
-        mode = override.get("mode", "light" if assignment["phase"] == "light" else "timed" if assignment["timed_questions"] else "practice")
+        mode = override.get("mode", "light" if assignment["phase"] in {"cancelled", "light"} else "timed" if assignment["timed_questions"] else "practice")
         if mode not in MODES:
             raise ValueError(f"Unknown mode: {mode}")
-        status = override.get("status", "CONFIRMED")
+        status = override.get("status", "CANCELLED" if assignment["phase"] == "cancelled" else "CONFIRMED")
         if status not in {"CONFIRMED", "CANCELLED", "TENTATIVE"}:
             raise ValueError(f"Unknown status: {status}")
+        if assignment["phase"] == "cancelled" and status != "CANCELLED":
+            raise ValueError("Deferred mornings must remain cancelled")
         local_time = time.fromisoformat(override.get("start", settings["start"]))
         if local_time.tzinfo is not None:
             raise ValueError("Study start must be a floating time")
@@ -110,6 +112,8 @@ def build_sessions(plan: dict, questions: dict | None = None) -> list[dict]:
         title = f"CP Boards | {countdown} | {assignment_label(assignment)}"
         if topic_id != default_topic and topic_id != "timed":
             title += " | " + topic["title"]
+        if override.get("label"):
+            title += " | " + override["label"]
         target = assignment["new"] + assignment["first_redo"] + assignment["repeat_capacity"]
         if "question_target" in override and override["question_target"] != target:
             raise ValueError("Edit dated question_plan.csv quotas instead of a conflicting question_target")
@@ -135,6 +139,13 @@ def build_sessions(plan: dict, questions: dict | None = None) -> list[dict]:
             "Exact dated question quotas: " + settings["site_url"].rstrip("/") + "/question-plan.csv",
             "Editable plan: " + settings["repository_url"] + "/blob/main/plan.toml",
         ]))
+        if status == "CANCELLED":
+            description = "\n\n".join(filter(None, [
+                f"{countdown.capitalize()} until the CP exam. This morning is cancelled.",
+                assignment_notes(assignment), override.get("note", ""),
+                f"MATERIALS\nMorning study now starts {settings.get('morning_start_date', settings['start_date']):%A, %B %d}.",
+                "FLEXIBLE PLAN\nFollow the revised dated quotas. Do not add the cancelled day's former quota to another day.",
+                "Study context: " + context_url]))
         sessions.append(dict(day=day, start=start, end=end, left=left, title=title,
                              goal=goal, materials=materials, description=description,
                              status=status, mode=mode, url=url, context_url=context_url,
@@ -222,8 +233,9 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
             raise ValueError("Duplicate or out-of-range video date")
         seen_dates.add(day)
         kind = item["kind"]
-        if kind not in {"watch", "review", "light"} or (kind == "watch") != bool(item["lessons"]):
+        if kind not in {"watch", "review", "light", "cancelled"} or (kind == "watch") != bool(item["lessons"]):
             raise ValueError("Invalid video session kind")
+        status = "CANCELLED" if kind == "cancelled" else "CONFIRMED"
         videos = []
         for key in item["lessons"]:
             if key in seen_lessons or key not in catalog or key in optional:
@@ -246,6 +258,10 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
         countdown = f"{left} {'day' if left == 1 else 'days'} left"
         providers = list(dict.fromkeys(v["course"] if v["course"] in {"Blood Bank Guy", "Morgan"} else "Sketchy" for v in videos))
         topic = (" + ".join(providers) + f" | {len(videos)} videos/parts" if videos else "Videos | Light recall" if kind == "light" else "Videos | Catch-up + recall")
+        if kind == "cancelled":
+            topic = "Cancelled evening"
+        elif item.get("label"):
+            topic = item["label"] + " | " + topic
         anchor = f"video-{day.isoformat()}"
         base = settings["site_url"].rstrip("/")
         goal = ("Watch every listed video or exact timestamp range. Rewatch Sketchy even if previously marked completed. Pause to interpret panels or images before the answer; explain a diagnostic distinction after each. Timestamp links set the start only: stop at the listed end."
@@ -268,9 +284,14 @@ def build_video_sessions(plan: dict, allocation: dict, catalog: dict) -> list[di
             notes.insert(4, "BLOOD BANK GUY\nThe teaching archive dates mostly to 2011-2014; Last Minute Essentials is from 2024. Check current guidance for changed policies, donor testing and terminology. Source pages include available handouts and corrections; for Antibody ID 2, work the handout panels before the explanation.\n" + "\n".join(dict.fromkeys(v["source_url"] for v in videos if v["course"] == "Blood Bank Guy")))
         if "Morgan" in providers:
             notes.insert(4, "MORGAN COMPANION MATERIAL\nThese are 2020-2021 recordings, not 2026 videos. Use the 2026 slides for updated terminology and testing details; slide review comes from the remaining recall time, not an additional full reading assignment.\n" + "\n".join(dict.fromkeys(v["source_url"] for v in videos if v["course"] == "Morgan")))
+        if item.get("note"):
+            notes.insert(1, item["note"])
+        if status == "CANCELLED":
+            goal = "No video assignment on this date. Follow the revised Wednesday kickoff."
+            notes = [goal, item.get("note", ""), "Revised video plan: " + base + "/#video-2026-09-16"]
         result.append(dict(day=day, start=start, end=end, left=left,
                            title=f"CP Boards | {countdown} | {topic}", goal=goal,
-                           materials=" + ".join(providers), description="\n\n".join(notes), status="CONFIRMED",
+                           materials=" + ".join(providers), description="\n\n".join(notes), status=status,
                            mode=kind, url=base + "/#" + anchor, context_url=base + "/context.html",
                            uid=f"{anchor}@{settings['namespace']}", anchor=anchor,
                            videos=videos, video_minutes=minutes))
@@ -301,7 +322,7 @@ def build_calendar(plan: dict, sessions: list[dict]) -> bytes:
         event.add("summary", session["title"])
         event.add("description", session["description"])
         event.add("status", session["status"])
-        event.add("transp", "OPAQUE")
+        event.add("transp", "TRANSPARENT" if session["status"] == "CANCELLED" else "OPAQUE")
         event.add("url", session["url"])
         event.add("attach", session["context_url"], parameters={"FMTTYPE": "text/html"})
         event.add("categories", ["CP Boards", "Study"])
@@ -359,7 +380,7 @@ def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROO
     settings = plan["settings"]
     base = settings["site_url"].rstrip("/")
     escape = html.escape
-    entries = []
+    entries, cancelled_entries = [], []
     for session in sessions:
         cancelled = " (cancelled)" if session["status"] == "CANCELLED" else ""
         lesson_links = ""
@@ -370,20 +391,22 @@ def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROO
         if session.get("question_links") and session["mode"] != "light":
             lesson_links += '<nav class="question-links" aria-label="Question bank setup">' + "".join(
                 f'<a href="{escape(url, quote=True)}">{escape(label)}</a>' for label, url in session["question_links"]) + '</nav>'
-        entries.append(f'''<details id="{session['anchor']}">
+        destination = cancelled_entries if cancelled else entries
+        destination.append(f'''<details id="{session['anchor']}">
 <summary><time datetime="{session['day'].isoformat()}">{session['day']:%a, %b %d}</time><span>{escape(session['title'])}{cancelled}</span><small>{session['start']:%H:%M}-{session['end']:%H:%M}</small></summary>
 {lesson_links}<p class="notes">{escape(session['description'])}</p></details>''')
     template = (root / "templates/index.html").read_text()
     default_start = time.fromisoformat(settings["start"])
     default_end = datetime.combine(settings["start_date"], default_start) + timedelta(minutes=settings["duration_minutes"])
-    schedule = f"{default_start:%H:%M}-{default_end:%H:%M} local daily; {settings['start_date']:%B %d}-{sessions[-1]['day']:%B %d}"
-    evenings = [s for s in sessions if "videos" in s]
+    schedule = f"{default_start:%H:%M}-{default_end:%H:%M} local daily; {settings.get('morning_start_date', settings['start_date']):%B %d}-{sessions[-1]['day']:%B %d}"
+    evenings = [s for s in sessions if "videos" in s and s["status"] != "CANCELLED"]
     if evenings:
         schedule += f". Videos {evenings[0]['start']:%H:%M}-{evenings[0]['end']:%H:%M}, {evenings[0]['day']:%B %d}-{evenings[-1]['day']:%B %d}; final two nights light"
     tokens = {"@@BASE@@": escape(base), "@@EXAM@@": settings["exam_date"].isoformat(),
               "@@EXAM_LABEL@@": settings["exam_date"].strftime("%B %d, %Y"),
               "@@SCHEDULE@@": escape(schedule), "@@WEBCAL@@": escape(base.replace("https://", "webcal://", 1) + "/cp-study.ics"),
-              "@@EVENTS@@": "\n".join(entries), "@@COUNT@@": str(len(sessions)),
+              "@@EVENTS@@": "\n".join(entries), "@@COUNT@@": str(len(entries)),
+              "@@CANCELLED_EVENTS@@": '<details class="video-group" id="cancelled-dates"><summary><span>Earlier dates (cancelled)</span></summary>' + "\n".join(cancelled_entries) + '</details>' if cancelled_entries else '',
               "@@REPO@@": escape(settings["repository_url"]),
               "@@OBJECTIVE@@": escape(plan["strategy"]["objective"]),
               "@@QUESTION_SUMMARY@@": ''.join(f'<p>{escape(plan["strategy"][key])}</p>' for key in ("question_plan", "capacity")),

@@ -1,6 +1,7 @@
 {
   "source_checked": "2026-09-13",
-  "revision": "Complete BBGuy + Morgan + Micro; supersedes the original Path/Pharm-heavy future allocation",
+  "revised_on": "2026-09-14",
+  "revision": "Wednesday video launch, Thursday five-video review, Friday morning kickoff",
   "start": "21:00",
   "duration_minutes": 90,
   "max_video_minutes": 80,
@@ -84,79 +85,80 @@
   "sessions": [
     {
       "date": "2026-09-15",
-      "kind": "watch",
-      "lessons": [
-        "bbguy-bloodgroups",
-        "gram-positive-cocci/lesson/streptococcus-agalactiae-group-b-strep"
-      ]
+      "kind": "cancelled",
+      "lessons": [],
+      "note": "Tuesday video block cancelled; video study starts Wednesday September 16."
     },
     {
       "date": "2026-09-16",
       "kind": "watch",
       "lessons": [
-        "acute-kidney-injury-1/lesson/renal-function-tests-acute-kidney-injury-aki",
-        "gram-positive-cocci/lesson/staphylococcus-aureus",
-        "gram-positive-cocci/lesson/staphylococcus-epidermidis-saprophyticus",
-        "gram-positive-cocci/lesson/streptococcus-pyogenes-group-a-strep",
-        "gram-positive-cocci/lesson/streptococcus-pneumoniae-viridans",
-        "gram-positive-cocci/lesson/enterococcus-faecium-faecalis",
-        "gram-positive-cocci/lesson/streptococcus-gallolyticus-group-d-strep"
-      ]
+        "bbguy-bloodgroups",
+        "gram-positive-cocci/lesson/streptococcus-agalactiae-group-b-strep"
+      ],
+      "label": "Video kickoff",
+      "note": "Wednesday video launch. Morning question sessions start Friday September 18."
     },
     {
       "date": "2026-09-17",
       "kind": "watch",
       "lessons": [
-        "bbguy-pretransfusion",
-        "gram-positive-bacilli/lesson/bacillus-anthracis-cereus"
-      ]
+        "bbguy-acquiredb",
+        "bbguy-rhig",
+        "bbguy-leukoreduce",
+        "bbguy-irradiate",
+        "gram-positive-cocci/lesson/staphylococcus-aureus"
+      ],
+      "label": "Five-video review",
+      "note": "Thursday: exactly these five short videos, approximately 54 minutes. Rewatch familiar topics or preview them if new, then briefly recall the main distinctions. No extra video assignment tonight. These count once toward the complete video plan; no completion is assumed."
     },
     {
       "date": "2026-09-18",
       "kind": "watch",
       "lessons": [
-        "morgan-bacteriology1",
-        "gram-positive-bacilli/lesson/clostridium-tetani",
-        "gram-positive-bacilli/lesson/clostridium-perfringens"
+        "bbguy-pretransfusion",
+        "gram-positive-cocci/lesson/staphylococcus-epidermidis-saprophyticus",
+        "gram-positive-cocci/lesson/enterococcus-faecium-faecalis"
       ]
     },
     {
       "date": "2026-09-19",
       "kind": "watch",
       "lessons": [
-        "bbguy-antibodyid1",
-        "gram-positive-bacilli/lesson/clostridium-botulinum",
-        "gram-positive-bacilli/lesson/corynebacterium-diphtheriae",
-        "gram-positive-branching-filamentous-rods/lesson/actinomyces-israelii"
+        "morgan-bacteriology1",
+        "gram-positive-cocci/lesson/streptococcus-pneumoniae-viridans",
+        "gram-positive-bacilli/lesson/listeria-monocytogenes"
       ]
     },
     {
       "date": "2026-09-20",
       "kind": "watch",
       "lessons": [
-        "volume-electrolyte-acid-base-disorders/lesson/osmolality-sodium-disorders",
-        "gram-positive-bacilli/lesson/clostridioides-difficile",
-        "gram-positive-bacilli/lesson/listeria-monocytogenes",
-        "gram-positive-branching-filamentous-rods/lesson/nocardia-asteroides",
-        "gram-negative-cocci/lesson/neisseria-overview",
-        "gram-negative-cocci/lesson/neisseria-meningitidis",
-        "gram-negative-cocci/lesson/moraxella-catarrhalis"
+        "bbguy-antibodyid1",
+        "gram-positive-cocci/lesson/streptococcus-pyogenes-group-a-strep",
+        "gram-positive-branching-filamentous-rods/lesson/actinomyces-israelii"
       ]
     },
     {
       "date": "2026-09-21",
       "kind": "watch",
       "lessons": [
-        "bbguy-antibodyid2",
-        "gram-negative-cocci/lesson/neisseria-gonorrhoeae"
+        "acute-kidney-injury-1/lesson/renal-function-tests-acute-kidney-injury-aki",
+        "gram-positive-cocci/lesson/streptococcus-gallolyticus-group-d-strep",
+        "gram-positive-bacilli/lesson/bacillus-anthracis-cereus",
+        "gram-positive-bacilli/lesson/clostridium-tetani",
+        "gram-positive-bacilli/lesson/clostridium-botulinum",
+        "gram-positive-bacilli/lesson/clostridium-perfringens",
+        "gram-positive-bacilli/lesson/clostridioides-difficile",
+        "gram-negative-bacilli-enteric-tract/lesson/vibrio-spp"
       ]
     },
     {
       "date": "2026-09-22",
       "kind": "watch",
       "lessons": [
-        "morgan-bacteriology2",
-        "gram-negative-bacilli-enteric-tract/lesson/klebsiella-pneumoniae-enterobacter-spp-serratia-marcescens",
+        "bbguy-antibodyid2",
+        "gram-positive-bacilli/lesson/corynebacterium-diphtheriae",
         "gram-negative-bacilli-enteric-tract/lesson/proteus-mirabilis"
       ]
     },
@@ -164,86 +166,77 @@
       "date": "2026-09-23",
       "kind": "watch",
       "lessons": [
-        "bbguy-kell",
-        "gram-negative-bacilli-enteric-tract/lesson/salmonella-intro-to-salmonella-nts",
-        "gram-negative-bacilli-enteric-tract/lesson/salmonella-typhoidal-salmonella",
-        "gram-negative-bacilli-enteric-tract/lesson/shigella-spp",
-        "gram-negative-bacilli-enteric-tract/lesson/campylobacter-jejuni"
+        "morgan-bacteriology2",
+        "gram-positive-branching-filamentous-rods/lesson/nocardia-asteroides",
+        "gram-negative-bacilli-zoonotics/lesson/bartonella-henselae"
       ]
     },
     {
       "date": "2026-09-24",
       "kind": "watch",
       "lessons": [
-        "bbguy-lewis",
-        "gram-negative-bacilli-enteric-tract/lesson/escherichia-coli-etec-ehec",
-        "gram-negative-bacilli-enteric-tract/lesson/yersinia-enterocolitica-pestis",
-        "gram-negative-bacilli-enteric-tract/lesson/vibrio-spp",
-        "gram-negative-bacilli-enteric-tract/lesson/helicobacter-pylori",
-        "gram-negative-bacilli-enteric-tract/lesson/bacteroides-fragilis",
-        "gram-negative-bacilli-zoonotics/lesson/bartonella-henselae"
+        "bbguy-kell",
+        "gram-negative-cocci/lesson/neisseria-overview",
+        "gram-negative-cocci/lesson/neisseria-meningitidis",
+        "gram-negative-cocci/lesson/moraxella-catarrhalis"
       ]
     },
     {
       "date": "2026-09-25",
       "kind": "watch",
       "lessons": [
-        "bbguy-bombay",
-        "gram-negative-bacilli-respiratory-tract/lesson/bordetella-pertussis",
-        "gram-negative-bacilli-respiratory-tract/lesson/haemophilus-influenzae",
-        "gram-negative-bacilli-respiratory-tract/lesson/legionella-pneumophila",
-        "gram-negative-bacilli-respiratory-tract/lesson/pseudomonas-aeruginosa",
-        "gram-negative-bacilli-respiratory-tract/lesson/burkholderia-pseudomallei-cepacia-complex"
+        "bbguy-lewis",
+        "gram-negative-cocci/lesson/neisseria-gonorrhoeae",
+        "gram-negative-bacilli-enteric-tract/lesson/klebsiella-pneumoniae-enterobacter-spp-serratia-marcescens",
+        "gram-negative-bacilli-enteric-tract/lesson/salmonella-intro-to-salmonella-nts",
+        "gram-negative-bacilli-enteric-tract/lesson/salmonella-typhoidal-salmonella",
+        "gram-negative-bacilli-enteric-tract/lesson/shigella-spp"
       ]
     },
     {
       "date": "2026-09-26",
       "kind": "watch",
       "lessons": [
-        "morgan-mycobacteriology",
-        "gram-negative-bacilli-zoonotics/lesson/brucella-spp",
-        "gram-negative-bacilli-zoonotics/lesson/francisella-tularensis",
-        "gram-negative-bacilli-zoonotics/lesson/pasteurella-multocida"
+        "bbguy-bombay",
+        "gram-negative-bacilli-enteric-tract/lesson/escherichia-coli-etec-ehec",
+        "gram-negative-bacilli-enteric-tract/lesson/yersinia-enterocolitica-pestis",
+        "gram-negative-bacilli-enteric-tract/lesson/campylobacter-jejuni",
+        "gram-negative-bacilli-enteric-tract/lesson/helicobacter-pylori",
+        "gram-negative-bacilli-enteric-tract/lesson/bacteroides-fragilis"
       ]
     },
     {
       "date": "2026-09-27",
       "kind": "watch",
       "lessons": [
-        "bbguy-dvariants",
-        "gram-negative-bacilli-zoonotics/lesson/anaplasma-phagocytophilum-ehrlichia-chaffeensis",
-        "mycobacteria/lesson/mycobacterium-tuberculosis",
-        "mycobacteria/lesson/mycobacterium-leprae",
-        "spirochetes/lesson/borrelia-recurrentis"
+        "morgan-mycobacteriology",
+        "gram-negative-bacilli-respiratory-tract/lesson/bordetella-pertussis",
+        "gram-negative-bacilli-respiratory-tract/lesson/burkholderia-pseudomallei-cepacia-complex"
       ]
     },
     {
       "date": "2026-09-28",
       "kind": "watch",
       "lessons": [
-        "volume-electrolyte-acid-base-disorders/lesson/acid-base-disorders",
-        "mycobacteria/lesson/mycobacterium-avium-intracellulare-mycobacterium-scrofulaceum-mycobacterium-marinum",
-        "spirochetes/lesson/borrelia-burgdorferi",
-        "spirochetes/lesson/leptospira-interrogans",
-        "spirochetes/lesson/treponema-pallidum",
-        "gram-indeterminate-bacteria/lesson/chlamydia-trachomatis-chlamydophila-pneumoniae-chlamydophila-psittaci"
+        "bbguy-dvariants",
+        "gram-negative-bacilli-respiratory-tract/lesson/haemophilus-influenzae",
+        "gram-negative-bacilli-respiratory-tract/lesson/legionella-pneumophila",
+        "gram-negative-bacilli-respiratory-tract/lesson/pseudomonas-aeruginosa",
+        "gram-negative-bacilli-zoonotics/lesson/brucella-spp",
+        "gram-negative-bacilli-zoonotics/lesson/francisella-tularensis"
       ]
     },
     {
       "date": "2026-09-29",
       "kind": "watch",
       "lessons": [
-        "bbguy-acquiredb",
-        "bbguy-rhig",
-        "bbguy-leukoreduce",
-        "bbguy-irradiate",
-        "gram-indeterminate-bacteria/lesson/coxiella-burnetii",
-        "gram-indeterminate-bacteria/lesson/gardnerella-vaginalis",
-        "gram-indeterminate-bacteria/lesson/mycoplasma-pneumoniae",
-        "gram-indeterminate-bacteria/lesson/rickettsia-overview",
-        "gram-indeterminate-bacteria/lesson/rickettsia-prowazekii",
-        "gram-indeterminate-bacteria/lesson/rickettsia-rickettsii",
-        "systemic-mycoses/lesson/blastomyces-dermatitidis"
+        "volume-electrolyte-acid-base-disorders/lesson/osmolality-sodium-disorders",
+        "gram-negative-bacilli-zoonotics/lesson/pasteurella-multocida",
+        "gram-negative-bacilli-zoonotics/lesson/anaplasma-phagocytophilum-ehrlichia-chaffeensis",
+        "mycobacteria/lesson/mycobacterium-tuberculosis",
+        "mycobacteria/lesson/mycobacterium-leprae",
+        "mycobacteria/lesson/mycobacterium-avium-intracellulare-mycobacterium-scrofulaceum-mycobacterium-marinum",
+        "spirochetes/lesson/borrelia-burgdorferi"
       ]
     },
     {
@@ -251,13 +244,12 @@
       "kind": "watch",
       "lessons": [
         "bbguy-reactionworkup",
-        "systemic-mycoses/lesson/histoplasma-capsulatum",
-        "systemic-mycoses/lesson/coccidioides-immitis",
-        "systemic-mycoses/lesson/paracoccidioides-brasiliensis",
-        "cutaneous-mycoses/lesson/malassezia-furfur",
-        "cutaneous-mycoses/lesson/epidermophyton-spp-trichophyton-spp-microsporum-spp-dermatophytes",
-        "cutaneous-mycoses/lesson/sporothrix-schenckii",
-        "opportunistic-fungal-infections/lesson/cryptococcus-neoformans"
+        "spirochetes/lesson/borrelia-recurrentis",
+        "spirochetes/lesson/leptospira-interrogans",
+        "spirochetes/lesson/treponema-pallidum",
+        "gram-indeterminate-bacteria/lesson/chlamydia-trachomatis-chlamydophila-pneumoniae-chlamydophila-psittaci",
+        "gram-indeterminate-bacteria/lesson/coxiella-burnetii",
+        "gram-indeterminate-bacteria/lesson/rickettsia-overview"
       ]
     },
     {
@@ -265,7 +257,8 @@
       "kind": "watch",
       "lessons": [
         "bbguy-reactions",
-        "opportunistic-fungal-infections/lesson/mucor-spp-rhizopus-spp-mucormycetes"
+        "gram-indeterminate-bacteria/lesson/gardnerella-vaginalis",
+        "gram-indeterminate-bacteria/lesson/rickettsia-prowazekii"
       ]
     },
     {
@@ -273,7 +266,7 @@
       "kind": "watch",
       "lessons": [
         "morgan-mycology1",
-        "opportunistic-fungal-infections/lesson/pneumocystis-jirovecii"
+        "gram-indeterminate-bacteria/lesson/mycoplasma-pneumoniae"
       ]
     },
     {
@@ -281,12 +274,15 @@
       "kind": "watch",
       "lessons": [
         "bbguy-ttd1",
-        "opportunistic-fungal-infections/lesson/candida-albicans",
-        "opportunistic-fungal-infections/lesson/aspergillus-fumigatus",
-        "rna-viruses-positive-sense/lesson/picornaviridae-overview",
-        "rna-viruses-positive-sense/lesson/poliovirus-picornaviridae",
-        "rna-viruses-positive-sense/lesson/coxsackievirus-a-b-picornaviridae",
-        "rna-viruses-positive-sense/lesson/rhinovirus-picornaviridae"
+        "gram-indeterminate-bacteria/lesson/rickettsia-rickettsii",
+        "systemic-mycoses/lesson/histoplasma-capsulatum",
+        "systemic-mycoses/lesson/blastomyces-dermatitidis",
+        "systemic-mycoses/lesson/coccidioides-immitis",
+        "systemic-mycoses/lesson/paracoccidioides-brasiliensis",
+        "cutaneous-mycoses/lesson/malassezia-furfur",
+        "cutaneous-mycoses/lesson/epidermophyton-spp-trichophyton-spp-microsporum-spp-dermatophytes",
+        "cutaneous-mycoses/lesson/sporothrix-schenckii",
+        "opportunistic-fungal-infections/lesson/mucor-spp-rhizopus-spp-mucormycetes"
       ]
     },
     {
@@ -294,24 +290,22 @@
       "kind": "watch",
       "lessons": [
         "bbguy-ttd2",
-        "rna-viruses-positive-sense/lesson/hepatitis-a-virus-picornaviridae",
-        "rna-viruses-positive-sense/lesson/norovirus-norwalk-virus-caliciviridae",
-        "rna-viruses-positive-sense/lesson/flaviviridae-overview",
-        "rna-viruses-positive-sense/lesson/rubella-virus-matonaviridae"
+        "opportunistic-fungal-infections/lesson/candida-albicans",
+        "opportunistic-fungal-infections/lesson/aspergillus-fumigatus"
       ]
     },
     {
       "date": "2026-10-05",
       "kind": "watch",
       "lessons": [
-        "pharmacokinetic-basics/lesson/plasma-concentration-therapeutic-range",
-        "elimination/lesson/clearance-area-under-the-curve",
-        "elimination/lesson/elimination-rate-constant-half-life-steady-state",
-        "rna-viruses-positive-sense/lesson/hepatitis-c-virus-flaviviridae",
-        "rna-viruses-positive-sense/lesson/coronavirus-coronaviridae",
-        "rna-viruses-positive-sense/lesson/equine-encephalitis-viruses-chikungunya-virus-togaviridae",
-        "rna-viruses-positive-sense/lesson/hiv-overview-retroviridae",
-        "rna-viruses-positive-sense/lesson/hiv-life-cycle-retroviridae"
+        "volume-electrolyte-acid-base-disorders/lesson/acid-base-disorders",
+        "opportunistic-fungal-infections/lesson/cryptococcus-neoformans",
+        "opportunistic-fungal-infections/lesson/pneumocystis-jirovecii",
+        "rna-viruses-positive-sense/lesson/picornaviridae-overview",
+        "rna-viruses-positive-sense/lesson/poliovirus-picornaviridae",
+        "rna-viruses-positive-sense/lesson/coxsackievirus-a-b-picornaviridae",
+        "rna-viruses-positive-sense/lesson/rhinovirus-picornaviridae",
+        "rna-viruses-positive-sense/lesson/norovirus-norwalk-virus-caliciviridae"
       ]
     },
     {
@@ -325,15 +319,15 @@
       "date": "2026-10-07",
       "kind": "watch",
       "lessons": [
-        "rna-viruses-negative-sense/lesson/influenzavirus-orthomyxoviridae",
-        "rna-viruses-negative-sense/lesson/measles-mumps-parainfluenza-viruses-paramyxoviridae",
-        "rna-viruses-negative-sense/lesson/respiratory-syncytial-virus-human-metapneumovirus-pneumoviridae",
-        "rna-viruses-negative-sense/lesson/rabies-virus-rhabdoviridae",
-        "rna-viruses-negative-sense/lesson/ebolavirus-marburgvirus-filoviridae",
-        "rna-viruses-negative-sense/lesson/hantavirus-california-encephalitis-rift-valley-fever-viruses-bunyaviridae",
-        "rna-viruses-negative-sense/lesson/lymphocytic-choriomeningitis-virus-arenaviridae",
-        "rna-viruses-negative-sense/lesson/rotavirus-colorado-tick-fever-virus-reoviridae",
-        "dna-viruses/lesson/hhv-6-roseola-herpesviridae"
+        "pharmacokinetic-basics/lesson/plasma-concentration-therapeutic-range",
+        "elimination/lesson/clearance-area-under-the-curve",
+        "elimination/lesson/elimination-rate-constant-half-life-steady-state",
+        "rna-viruses-positive-sense/lesson/hepatitis-a-virus-picornaviridae",
+        "rna-viruses-positive-sense/lesson/flaviviridae-overview",
+        "rna-viruses-positive-sense/lesson/hepatitis-c-virus-flaviviridae",
+        "rna-viruses-positive-sense/lesson/coronavirus-coronaviridae",
+        "rna-viruses-positive-sense/lesson/equine-encephalitis-viruses-chikungunya-virus-togaviridae",
+        "rna-viruses-positive-sense/lesson/rubella-virus-matonaviridae"
       ]
     },
     {
@@ -341,21 +335,21 @@
       "kind": "watch",
       "lessons": [
         "morgan-parasitology",
-        "dna-viruses/lesson/herpes-simplex-virus-types-1-2-herpesviridae"
+        "rna-viruses-positive-sense/lesson/hiv-life-cycle-retroviridae"
       ]
     },
     {
       "date": "2026-10-09",
       "kind": "watch",
       "lessons": [
-        "dna-viruses/lesson/cytomegalovirus-herpesviridae",
-        "dna-viruses/lesson/epstein-barr-virus-herpesviridae",
-        "dna-viruses/lesson/varicella-zoster-virus-herpesviridae",
-        "dna-viruses/lesson/hhv-8-kaposis-sarcoma-herpesviridae",
-        "dna-viruses/lesson/jc-polyomavirus-bk-polyomavirus-polyomaviridae",
-        "dna-viruses/lesson/human-papillomavirus-papillomaviridae",
-        "dna-viruses/lesson/parvovirus-b19-parvoviridae",
-        "dna-viruses/lesson/adenovirus-adenoviridae"
+        "rna-viruses-positive-sense/lesson/hiv-overview-retroviridae",
+        "rna-viruses-negative-sense/lesson/influenzavirus-orthomyxoviridae",
+        "rna-viruses-negative-sense/lesson/measles-mumps-parainfluenza-viruses-paramyxoviridae",
+        "rna-viruses-negative-sense/lesson/respiratory-syncytial-virus-human-metapneumovirus-pneumoviridae",
+        "rna-viruses-negative-sense/lesson/rabies-virus-rhabdoviridae",
+        "rna-viruses-negative-sense/lesson/ebolavirus-marburgvirus-filoviridae",
+        "rna-viruses-negative-sense/lesson/hantavirus-california-encephalitis-rift-valley-fever-viruses-bunyaviridae",
+        "rna-viruses-negative-sense/lesson/lymphocytic-choriomeningitis-virus-arenaviridae"
       ]
     },
     {
@@ -363,36 +357,37 @@
       "kind": "watch",
       "lessons": [
         "morgan-virology",
-        "dna-viruses/lesson/smallpox-virus-cowpox-virus-and-molluscum-contagiosum-virus-poxviridae"
+        "rna-viruses-negative-sense/lesson/rotavirus-colorado-tick-fever-virus-reoviridae"
       ]
     },
     {
       "date": "2026-10-11",
       "kind": "watch",
       "lessons": [
-        "dna-viruses/lesson/hepatitis-b-viral-basics-infectious-diseases-hepadnaviridae",
-        "dna-viruses/lesson/hepatitis-b-viral-life-cycle-hepadnaviridae",
-        "protozoa-of-the-intestinal-tract/lesson/giardia-lamblia",
-        "protozoa-of-the-intestinal-tract/lesson/entamoeba-histolytica",
-        "protozoa-of-the-intestinal-tract/lesson/cryptosporidium-spp",
-        "protozoa-of-the-cns/lesson/toxoplasma-gondii",
-        "protozoa-of-the-cns/lesson/trypanosoma-brucei",
-        "protozoa-of-the-cns/lesson/naegleria-fowleri",
-        "protozoa-of-the-blood/lesson/trypanosoma-cruzi"
+        "dna-viruses/lesson/herpes-simplex-virus-types-1-2-herpesviridae",
+        "dna-viruses/lesson/cytomegalovirus-herpesviridae",
+        "dna-viruses/lesson/epstein-barr-virus-herpesviridae",
+        "dna-viruses/lesson/varicella-zoster-virus-herpesviridae",
+        "dna-viruses/lesson/hhv-6-roseola-herpesviridae",
+        "dna-viruses/lesson/hhv-8-kaposis-sarcoma-herpesviridae",
+        "dna-viruses/lesson/jc-polyomavirus-bk-polyomavirus-polyomaviridae",
+        "dna-viruses/lesson/parvovirus-b19-parvoviridae",
+        "dna-viruses/lesson/adenovirus-adenoviridae"
       ]
     },
     {
       "date": "2026-10-12",
       "kind": "watch",
       "lessons": [
-        "protozoa-of-the-blood/lesson/babesia-spp",
-        "protozoa-of-the-blood/lesson/plasmodium-infection-lifecycle",
-        "protozoa-of-the-blood/lesson/plasmodium-treatment-ppx",
-        "protozoa-of-the-blood/lesson/leishmania-braziliensis-donovani",
-        "protozoa-other-tissue/lesson/trichomonas-vaginalis",
-        "helminths-nematodes/lesson/intestinal-nematodes-enterobius-ancylostoma-necator-ascaris-strongyloides-and-trichinella",
-        "helminths-nematodes/lesson/tissue-nematodes-dracunculus-medinensis-wuchereria-bancrofti-onchocerca-volvulus-toxocara-canis-and-loa-loa",
-        "helminths-trematodes-cestodes/lesson/cestodes"
+        "dna-viruses/lesson/human-papillomavirus-papillomaviridae",
+        "dna-viruses/lesson/smallpox-virus-cowpox-virus-and-molluscum-contagiosum-virus-poxviridae",
+        "dna-viruses/lesson/hepatitis-b-viral-basics-infectious-diseases-hepadnaviridae",
+        "dna-viruses/lesson/hepatitis-b-viral-life-cycle-hepadnaviridae",
+        "protozoa-of-the-intestinal-tract/lesson/giardia-lamblia",
+        "protozoa-of-the-intestinal-tract/lesson/entamoeba-histolytica",
+        "protozoa-of-the-intestinal-tract/lesson/cryptosporidium-spp",
+        "protozoa-of-the-cns/lesson/toxoplasma-gondii",
+        "protozoa-of-the-cns/lesson/naegleria-fowleri"
       ]
     },
     {
@@ -400,7 +395,8 @@
       "kind": "watch",
       "lessons": [
         "bbguy-lastminute-part1",
-        "helminths-trematodes-cestodes/lesson/trematodes"
+        "protozoa-of-the-cns/lesson/trypanosoma-brucei",
+        "protozoa-of-the-blood/lesson/trypanosoma-cruzi"
       ]
     },
     {
@@ -408,13 +404,24 @@
       "kind": "watch",
       "lessons": [
         "bbguy-lastminute-part2",
-        "ectoparasites/lesson/scabies-lice-crabs"
+        "protozoa-of-the-blood/lesson/babesia-spp",
+        "protozoa-of-the-blood/lesson/plasmodium-infection-lifecycle"
       ]
     },
     {
       "date": "2026-10-15",
-      "kind": "review",
-      "lessons": []
+      "kind": "watch",
+      "lessons": [
+        "protozoa-of-the-blood/lesson/plasmodium-treatment-ppx",
+        "protozoa-of-the-blood/lesson/leishmania-braziliensis-donovani",
+        "protozoa-other-tissue/lesson/trichomonas-vaginalis",
+        "helminths-nematodes/lesson/intestinal-nematodes-enterobius-ancylostoma-necator-ascaris-strongyloides-and-trichinella",
+        "helminths-nematodes/lesson/tissue-nematodes-dracunculus-medinensis-wuchereria-bancrofti-onchocerca-volvulus-toxocara-canis-and-loa-loa",
+        "helminths-trematodes-cestodes/lesson/cestodes",
+        "helminths-trematodes-cestodes/lesson/trematodes",
+        "ectoparasites/lesson/scabies-lice-crabs"
+      ],
+      "note": "This is now a watch night after the later launch, replacing the former video catch-up evening. The morning timed question block and repeat-review reserve are unchanged."
     },
     {
       "date": "2026-10-16",

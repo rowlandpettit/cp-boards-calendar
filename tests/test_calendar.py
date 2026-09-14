@@ -43,7 +43,10 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertTrue(str(event["ATTACH"]).endswith("/context.html"))
             self.assertIn("MATERIALS", str(event["DESCRIPTION"]))
             self.assertIn("FLEXIBLE PLAN", str(event["DESCRIPTION"]))
-        self.assertIn("54 new + 0 redos", str(events[0]["SUMMARY"]))
+        self.assertTrue(all(str(e['STATUS']) == 'CANCELLED' for e in events[:4]))
+        self.assertTrue(all(str(e['TRANSP']) == 'TRANSPARENT' for e in events[:4]))
+        self.assertIn("65 new + 0 redos", str(events[4]["SUMMARY"]))
+        self.assertIn("Kickoff", str(events[4]["SUMMARY"]))
         self.assertIn("1 day left", str(events[-1]["SUMMARY"]))
 
     def test_topic_time_and_revision_edits_keep_uids(self):
@@ -51,12 +54,12 @@ class StudyCalendarTests(unittest.TestCase):
         changed = deepcopy(self.plan)
         changed["settings"]["sequence"] += 1
         changed["settings"]["updated_at"] += timedelta(hours=1)
-        changed["overrides"]["2026-09-15"] = {"topic": "micro", "start": "05:30", "duration_minutes": 90}
+        changed["overrides"]["2026-09-19"] = {"topic": "micro", "start": "05:30", "duration_minutes": 90}
         after = self.events(changed)
         self.assertEqual([e["UID"] for e in before], [e["UID"] for e in after])
-        self.assertIn("Microbiology", str(after[1]["SUMMARY"]))
-        self.assertEqual(after[1].decoded("DTEND").hour, 7)
-        self.assertEqual(int(after[1]["SEQUENCE"]), self.plan["settings"]["sequence"] + 1)
+        self.assertIn("Microbiology", str(after[5]["SUMMARY"]))
+        self.assertEqual(after[5].decoded("DTEND").hour, 7)
+        self.assertEqual(int(after[5]["SEQUENCE"]), self.plan["settings"]["sequence"] + 1)
 
     def test_cancel_preserves_occurrence(self):
         self.plan["overrides"]["2026-09-15"] = {"status": "CANCELLED"}
@@ -77,7 +80,8 @@ class StudyCalendarTests(unittest.TestCase):
         items = root.findall("./channel/item")
         self.assertEqual(len(items), 35)
         self.assertEqual([item.findtext("guid") for item in items], [s["uid"] for s in sessions])
-        self.assertIn("5-7 AM", items[0].findtext("description"))
+        self.assertIn("5-7 AM", items[4].findtext("description"))
+        self.assertTrue(items[0].findtext('title').startswith('Cancelled:'))
 
     def test_invalid_configuration_fails(self):
         mutations = [
@@ -87,6 +91,8 @@ class StudyCalendarTests(unittest.TestCase):
             lambda p: p["overrides"].update({"2026-09-15": {"topic": "unknown"}}),
             lambda p: p["settings"].update(updated_at=p["settings"]["updated_at"].replace(tzinfo=None)),
             lambda p: p["resources"].update(dojo="https://user:secret@example.org/"),
+            lambda p: p['settings'].update(morning_start_date=date(2026, 10, 19)),
+            lambda p: p['overrides']['2026-09-14'].update(status='CONFIRMED'),
         ]
         for mutate in mutations:
             plan = deepcopy(self.plan)
@@ -123,7 +129,11 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertIn('Morgan (7 videos)', text)
             self.assertIn('Optional, not assigned', text)
             self.assertIn('watch?v=zc8uiuLX83Q&amp;t=3600s', text)
-            self.plan["overrides"]["2026-09-14"]["goal"] = "<script>not executable</script>"
+            self.assertIn('64 study blocks', text)
+            self.assertIn('id="cancelled-dates"', text)
+            self.assertLess(text.index('id="video-2026-09-16"'), text.index('id="study-2026-09-18"'))
+            self.assertGreater(text.index('id="study-2026-09-14"'), text.index('id="cancelled-dates"'))
+            self.plan["overrides"]["2026-09-18"]["goal"] = "<script>not executable</script>"
             write_pages(self.plan, build_sessions(self.plan), public, root)
             self.assertIn("&lt;script&gt;not executable&lt;/script&gt;", (public / "index.html").read_text())
 
@@ -155,8 +165,13 @@ class StudyCalendarTests(unittest.TestCase):
         self.assertEqual(len({v['id'] for v in assigned if v['course'] == 'Blood Bank Guy'}), 17)
         self.assertEqual(len({v['id'] for v in assigned if v['course'] == 'Morgan'}), 7)
         self.assertEqual(len(allocation['optional_lessons']), 75)
-        self.assertEqual(sessions[30]['mode'], 'review')
-        self.assertFalse(sessions[30]['videos'])
+        self.assertEqual(sessions[0]['status'], 'CANCELLED')
+        self.assertFalse(sessions[0]['videos'])
+        self.assertEqual(sessions[30]['mode'], 'watch')
+        self.assertEqual(len(sessions[2]['videos']), 5)
+        self.assertEqual(sessions[2]['video_minutes'], 54)
+        self.assertIn('Five-video review', sessions[2]['title'])
+        self.assertEqual(sessions[1]['day'], date(2026, 9, 16))
         for index, session in enumerate(sessions):
             self.assertEqual(session["day"], date(2026, 9, 15) + timedelta(days=index))
             self.assertEqual(session["start"].strftime("%H:%M"), "21:00")
@@ -173,6 +188,7 @@ class StudyCalendarTests(unittest.TestCase):
         combined = sorted(morning + sessions, key=lambda s: s["start"])
         self.assertEqual(len({s["uid"] for s in combined}), 69)
         self.assertEqual(len({s["anchor"] for s in combined}), 69)
+        self.assertEqual(len([s for s in combined if s['status'] != 'CANCELLED']), 64)
         events = Calendar.from_ical(build_calendar(self.plan, combined)).walk("VEVENT")
         self.assertEqual({str(e["UID"]) for e in events if str(e["UID"]).startswith("study-")}, {s["uid"] for s in morning})
         self.assertEqual(len(ET.fromstring(build_rss(self.plan, combined)).findall("./channel/item")), 69)
@@ -185,9 +201,9 @@ class StudyCalendarTests(unittest.TestCase):
         allocation = json.loads((ROOT / "video_plan.json").read_text())
         mutations = [
             lambda a: a["sessions"][0].update(date="2026-10-19"),
-            lambda a: a["sessions"][0]["lessons"].append(a["sessions"][0]["lessons"][0]),
+            lambda a: a["sessions"][1]["lessons"].append(a["sessions"][1]["lessons"][0]),
             lambda a: a["sessions"][0]["lessons"].append("missing/lesson/missing"),
-            lambda a: a["sessions"][0]["lessons"].pop(),
+            lambda a: a["sessions"][1]["lessons"].pop(),
             lambda a: a.update(max_video_minutes=10),
             lambda a: a.update(start="23:30"),
             lambda a: a["optional_lessons"].append('bbguy-bloodgroups'),
@@ -244,12 +260,21 @@ class StudyCalendarTests(unittest.TestCase):
         self.assertEqual(sum(r["first_redo"] for r in rows.values()), 658)
         self.assertEqual(estimated_misses(658, 60), 395)
         self.assertEqual(395 - expected["repeat_capacity"], 75)
-        self.assertEqual(rows[date(2026, 9, 14)]["new"], 54)
-        self.assertEqual(rows[date(2026, 9, 15)]["new"], 53)
-        self.assertEqual(rows[date(2026, 9, 16)]["first_redo"], 10)
-        self.assertEqual(rows[date(2026, 10, 4)]["new"], 52)
+        self.assertEqual(rows[date(2026, 9, 14)]["new"], 0)
+        self.assertEqual(rows[date(2026, 9, 15)]["new"], 0)
+        self.assertEqual(rows[date(2026, 9, 18)]["new"], 65)
+        self.assertEqual(rows[date(2026, 9, 18)]["first_redo"], 0)
+        self.assertEqual(rows[date(2026, 9, 19)]["first_redo"], 0)
+        self.assertEqual(rows[date(2026, 9, 20)]["first_redo"], 10)
+        self.assertEqual(rows[date(2026, 10, 4)]["new"], 64)
         early = [r for d, r in rows.items() if d <= date(2026, 10, 4)]
-        self.assertEqual(sum(r["first_redo"] for r in early), 190)
+        self.assertEqual(sum(r["first_redo"] for r in early), 150)
+        first_pass = [r for r in rows.values() if r['phase'] == 'first_pass']
+        self.assertEqual(len(first_pass), 17)
+        self.assertEqual([r['new'] for r in first_pass], [65] * 8 + [64] * 9)
+        later = [r for r in rows.values() if r['phase'] == 'first_redo']
+        self.assertEqual(sum(r['first_redo'] for r in later), 508)
+        self.assertEqual({r['first_redo'] for r in later}, {63, 64})
         for day, row in rows.items():
             if day > date(2026, 10, 4):
                 self.assertEqual(row["new"], 0)
@@ -260,12 +285,12 @@ class StudyCalendarTests(unittest.TestCase):
 
     def test_daily_quotas_in_feed_and_matching_site(self):
         sessions = build_sessions(self.plan)
-        first = sessions[0]
-        for text in ("PathDojo: 43 NEW", "ASCP: 8 NEW", "3 NEW shared", "54 new + 0 first redos",
+        first = sessions[4]
+        for text in ("PathDojo: 53 NEW", "ASCP: 9 NEW", "3 NEW shared", "65 new + 0 first redos",
                      "05:25-06:40", "06:40-06:55", "additional daytime study"):
             self.assertIn(text, first["description"])
-        self.assertEqual(first["assignment"]["new"], 54)
-        self.assertIn("hypothetical 60%", sessions[2]["description"])
+        self.assertEqual(first["assignment"]["new"], 65)
+        self.assertIn("hypothetical 60%", sessions[6]["description"])
         self.assertEqual(sessions[31]["assignment"]["timed_questions"], 55)
         self.assertEqual(sessions[31]["assignment"]["repeat_capacity"], 80)
         self.assertIn("55 timed + 25 review slots", sessions[31]["title"])

@@ -2,13 +2,13 @@
 
 ## Objective
 
-Prepare for the October 19, 2026 CP-only primary examination using daily protected study time, accurate explanations, practical interpretation and spaced recall. The initial schedule reserves 5-7 AM daily. The plan is provisional and should change as actual pace and weak areas become clear.
+Prepare for the October 19, 2026 CP-only primary examination using daily protected study time, accurate explanations, practical interpretation and spaced recall. Morning sessions now start Friday September 18, 5-7 AM daily; videos start Wednesday September 16 at 9 PM. Friday is the kickoff. The requested longer Friday morning has no confirmed end time, so only 5-7 AM is reserved until clarified. The plan is provisional and should change as actual pace and weak areas become clear.
 
 ## Daily Routine
 
 The updated morning is question-first: 5:00-5:25 due first redos (or new questions if none are due), 5:25-6:40 new mixed questions and explanations, 6:40-6:55 targeted guide reading, 6:55-7:00 a private progress log. Review-only days use the first 100 minutes for missed questions. Timed-practice and final-light dates are exceptions. Anki is distributed through the day. Familiar audio or recall at the gym can support review, but detailed questions, calculations and images require focused attention.
 
-Review wrong and uncertain answers immediately. From September 16, do 10 first redos daily from questions at least two days old; use recurring gaps first. This early sample does not promise all misses a two-day interval. Clear the remaining first-miss queue by October 12, then work repeat misses and practical gaps October 13-16. A complete first pass is not the end of the work. Daily question quotas are not two-hour guarantees: at 3-4 minutes per new question and 2-3 per redo, with 20 minutes of reading/logging, typical first-pass days need about 3-4.5 hours. Reserve another 1-2.5 hours of actual daytime capacity; no extra clock-time block has been invented. Replan if only two hours are available.
+Review wrong and uncertain answers immediately. From September 20, do 10 first redos daily from questions at least two days old; use recurring gaps first. This early sample does not promise all misses a two-day interval. Clear the remaining first-miss queue by October 12, then work repeat misses and practical gaps October 13-16. A complete first pass is not the end of the work. At 3-4 minutes per new question and 2-3 per redo, with 20 minutes of reading/logging, the compressed first pass needs about 4-5.25 hours daily. Reserve another 2-3.25 daytime hours beyond the two-hour anchor; no extra clock-time block has been invented. Replan if that capacity is unavailable. September 14-17 mornings are cancelled and zeroed, not catch-up debt or presumed completed work.
 
 ## Required Question Banks
 
@@ -20,9 +20,9 @@ Use Learning Mode and Random selection. The initial ASCP setup skipped a questio
 
 | Phase | Dates | Exact planned work |
 | --- | --- | --- |
-| Mixed first pass | Sep 14-Oct 4 | 1,096 unique new questions: 54 on Sep 14, 53 on Sep 15-16, 52 thereafter |
-| Early first redos | Sep 16-Oct 4 | 8 PathDojo + 2 ASCP daily, 190 total |
-| Finish first redos | Oct 5-12 | 468 remaining estimated misses, 58-60 daily |
+| Mixed first pass | Sep 18-Oct 4 | 1,096 unique new questions: 65 daily Sep 18-25, then 64 daily Sep 26-Oct 4 |
+| Early first redos | Sep 20-Oct 4 | 8 PathDojo + 2 ASCP daily, 150 total |
+| Finish first redos | Oct 5-12 | 508 remaining estimated misses, 63-64 daily |
 | Repeat/gap reserve | Oct 13-16 | Up to 80 daily, 320 total; Oct 15 includes 55 timed questions within those slots |
 | Light | Oct 17-18 | No required new questions or catch-up quota |
 
@@ -34,9 +34,9 @@ Prioritize due selected transfusion, heme/coag and chemistry cards; select Sketc
 
 ## Evening Videos
 
-Starting Tuesday September 15, reserve 9-10:30 PM for all 17 videos in the [Blood Bank Guy teaching library](https://www.bbguy.org/education/videos/), all seven [Morgan pathCast microbiology recordings](https://www.youtube.com/playlist?list=PL4GDLmrdXtfR-FnQIHq79-pQ01MdrFLd9), all 118 Sketchy Micro lessons and six selected Path/Pharm lessons. This September 13 revision replaces the earlier 199-Sketchy-only allocation. It does not include the separate Blood Bank Guy podcast archive.
+Starting Wednesday September 16, reserve 9-10:30 PM for all 17 videos in the [Blood Bank Guy teaching library](https://www.bbguy.org/education/videos/), all seven [Morgan pathCast microbiology recordings](https://www.youtube.com/playlist?list=PL4GDLmrdXtfR-FnQIHq79-pQ01MdrFLd9), all 118 Sketchy Micro lessons and six selected Path/Pharm lessons. This September 14 revision retains the complete required inventory while changing the dated allocation. It does not include the separate Blood Bank Guy podcast archive.
 
-The plan covers 148 distinct videos in 150 dated assignments, approximately 40 hours 8 minutes using rounded normal-speed budgets. Every watch night leaves at least ten minutes for pauses and recall. October 15 is catch-up, not a new-video quota; October 17-18 are light. The full 179-minute Last Minute Essentials is assigned in three consecutive-content parts on October 13, 14 and 16. Each link sets its start time; the listed end time is the stopping point. Nothing from the video is omitted.
+The plan covers 148 distinct videos in 150 dated assignments, approximately 40 hours 8 minutes using rounded normal-speed budgets. Every watch night leaves at least ten minutes for pauses and recall. Thursday September 17 is exactly five review videos: Acquired B, RhIG Dosage, Why Leukoreduce, Why Irradiate, and Sketchy Staphylococcus aureus, about 54 minutes total. Rewatch if familiar or preview if new; these count once in the inventory. No extra video quota that night. October 15 now contains videos instead of the former full catch-up evening, while its morning question-review reserve remains. October 17-18 stay light. The full 179-minute Last Minute Essentials is still assigned in three parts on October 13, 14 and 16. Each link sets its start time; stop at the listed end. Nothing is omitted.
 
 Blood Bank Guy source runtime is 14:01:09 and Morgan is 8:13:30, verified from public YouTube metadata September 13. Most BBGuy archive lessons date to 2011-2014, with the live board review from 2024. Source pages carry handouts and corrections. Interpret Antibody ID 2 panels before watching their explanations. Morgan recordings date to 2020-2021; [her 2026 posts](https://www.microbeswithmorgan.com/) are updated slide decks, not new recorded lectures. Use these companions and current references for changed terminology, donor/testing policies and diagnostic details.
 
@@ -56,7 +56,7 @@ Use the [current content specifications](https://abpath.org/wp-content/uploads/2
 
 Record actual minutes, fresh questions, uncertain answers, recurring gaps and useful Anki selections privately. Every week, compare the remaining work with actual capacity, then revise upcoming dated overrides. A missed day is information for replanning, not a reason to double the next day's burden. Repeated-question accuracy is not a fresh readiness measure.
 
-Check actual minutes after September 16, then review the plan every Sunday. Track each bank's unique remaining questions, first misses not yet retried, repeat misses, explanation backlog and available daytime hours. Also check coverage against the blueprint: random banks need not match exam weights. Change future CSV quotas and overrides together while preserving historical work and event UIDs. Prioritize retained understanding and broad core coverage over completion percentages. Keep October 17-18 light. Readiness cannot be inferred from the countdown or repeated-question scores alone.
+Check actual minutes September 20 after the first three morning sessions, then every Sunday. Track each bank's unique remaining questions, first misses not yet retried, repeat misses, explanation backlog and available daytime hours. Also check coverage against the blueprint: random banks need not match exam weights. Change future CSV quotas and overrides together while preserving recorded work and event UIDs. Prioritize retained understanding and broad core coverage over completion percentages. Keep October 17-18 light. Readiness cannot be inferred from the countdown or repeated-question scores alone.
 
 ## Evidence
 
