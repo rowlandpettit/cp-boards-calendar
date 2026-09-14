@@ -425,12 +425,21 @@ def write_pages(plan: dict, sessions: list[dict], public: Path, root: Path = ROO
     (public / ".nojekyll").touch()
 
 
+def remove_requested_occurrences(plan: dict, sessions: list[dict]) -> list[dict]:
+    removed = set(plan["settings"].get("removed_occurrences", []))
+    by_anchor = {session["anchor"]: session for session in sessions}
+    if any(anchor not in by_anchor or by_anchor[anchor]["status"] != "CANCELLED" for anchor in removed):
+        raise ValueError("Only known cancelled occurrences can be explicitly removed")
+    return [session for session in sessions if session["anchor"] not in removed]
+
+
 def generate(root: Path = ROOT) -> list[dict]:
     plan = read_plan(root / "plan.toml")
     questions = read_question_plan(root / "question_plan.csv", plan)
     sessions = build_sessions(plan, questions)
     allocation = json.loads((root / "video_plan.json").read_text())
     sessions += build_video_sessions(plan, allocation, read_all_videos(root))
+    sessions = remove_requested_occurrences(plan, sessions)
     sessions.sort(key=lambda s: s["start"])
     public = root / "public"
     public.mkdir(exist_ok=True)

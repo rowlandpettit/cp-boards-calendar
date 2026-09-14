@@ -9,8 +9,9 @@ floating_times = true
 namespace = "cp-boards-calendar.rowlandpettit.com"
 site_url = "https://rowlandpettit.com/cp-boards-calendar"
 repository_url = "https://github.com/rowlandpettit/cp-boards-calendar"
-sequence = 6
-updated_at = 2026-09-14T22:36:53Z
+sequence = 7
+updated_at = 2026-09-14T22:51:48Z
+removed_occurrences = ["study-2026-09-14", "study-2026-09-15", "study-2026-09-16", "study-2026-09-17", "video-2026-09-15"]
 
 [strategy]
 objective = "Prepare for the October 19 CP-only primary examination through question practice, targeted explanations, practical interpretation and spaced recall."

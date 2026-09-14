@@ -13,7 +13,7 @@ from icalendar import Calendar
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, read_lecture_catalog, read_all_videos, write_pages
+from generate_calendar import build_calendar, build_rss, build_sessions, build_video_sessions, generate, read_plan, read_video_catalog, read_lecture_catalog, read_all_videos, remove_requested_occurrences, write_pages
 from question_workload import read_question_plan, estimated_misses
 
 
@@ -67,6 +67,21 @@ class StudyCalendarTests(unittest.TestCase):
         self.assertEqual(len(events), 35)
         self.assertEqual(str(events[1]["STATUS"]), "CANCELLED")
 
+    def test_explicit_removal_preserves_all_remaining_sessions(self):
+        sessions = build_sessions(self.plan) + build_video_sessions(
+            self.plan, json.loads((ROOT / "video_plan.json").read_text()), read_all_videos())
+        published = remove_requested_occurrences(self.plan, sessions)
+        self.assertEqual(published, [session for session in sessions if session["status"] != "CANCELLED"])
+        self.assertEqual(len(published), 64)
+        unchanged = deepcopy(self.plan)
+        unchanged["settings"].pop("removed_occurrences")
+        self.assertEqual(remove_requested_occurrences(unchanged, sessions), sessions)
+        for anchor in ("study-2026-09-18", "video-2026-09-16", "study-2099-01-01"):
+            changed = deepcopy(self.plan)
+            changed["settings"]["removed_occurrences"].append(anchor)
+            with self.assertRaises(ValueError):
+                remove_requested_occurrences(changed, sessions)
+
     def test_escaping_and_utf8_round_trip(self):
         value = "Panel, QC; A\\B\nInterpretation <test> & café"
         self.plan["overrides"]["2026-09-14"]["note"] = value
@@ -115,12 +130,18 @@ class StudyCalendarTests(unittest.TestCase):
             shutil.copytree(ROOT / "templates", root / "templates")
             generate(root)
             public = root / "public"
-            self.assertEqual(len(Calendar.from_ical((public / "cp-study.ics").read_bytes()).walk("VEVENT")), 69)
+            events = Calendar.from_ical((public / "cp-study.ics").read_bytes()).walk("VEVENT")
+            self.assertEqual(len(events), 64)
+            self.assertTrue(all(str(event["STATUS"]) == "CONFIRMED" for event in events))
+            items = ET.fromstring((public / "rss.xml").read_bytes()).findall("./channel/item")
+            self.assertEqual(len(items), 64)
+            self.assertEqual({item.findtext("guid") for item in items}, {str(event["UID"]) for event in events})
             text = (public / "index.html").read_text()
             self.assertNotIn("@@", text)
             self.assertIn("05:00-07:00", text)
-            self.assertIn('id="study-2026-09-15"', text)
-            self.assertIn('id="video-2026-09-15"', text)
+            for anchor in self.plan["settings"]["removed_occurrences"]:
+                self.assertNotIn(f'id="{anchor}"', text)
+                self.assertNotIn(f"{anchor}@{self.plan['settings']['namespace']}", {str(event["UID"]) for event in events})
             self.assertIn('ASCP shared heme setup</a>', text)
             self.assertIn('href="https://pathdojo.com/exams/create/?exam_type=tutorial"', text)
             self.assertEqual((public / "question-plan.csv").read_bytes(), (root / "question_plan.csv").read_bytes())
@@ -130,9 +151,8 @@ class StudyCalendarTests(unittest.TestCase):
             self.assertIn('Optional, not assigned', text)
             self.assertIn('watch?v=zc8uiuLX83Q&amp;t=3600s', text)
             self.assertIn('64 study blocks', text)
-            self.assertIn('id="cancelled-dates"', text)
+            self.assertNotIn('id="cancelled-dates"', text)
             self.assertLess(text.index('id="video-2026-09-16"'), text.index('id="study-2026-09-18"'))
-            self.assertGreater(text.index('id="study-2026-09-14"'), text.index('id="cancelled-dates"'))
             self.plan["overrides"]["2026-09-18"]["goal"] = "<script>not executable</script>"
             write_pages(self.plan, build_sessions(self.plan), public, root)
             self.assertIn("&lt;script&gt;not executable&lt;/script&gt;", (public / "index.html").read_text())
